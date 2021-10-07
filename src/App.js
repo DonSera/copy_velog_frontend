@@ -1,24 +1,40 @@
 import './App.css';
-import axios from "axios";
+import {login, signup} from "./lib/server/post";
+import {useState} from "react";
 
 function App() {
-    const server = 'http://localhost:3001';
-    // const server = ''
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [userInfo, setUserInfo] = useState({});
 
-    const sendRequest = async () => {
-        const id = 7;
-        try {
-            axios.get(`${server}/button?id=${id}`).then(res => {
-                console.log('res : ' + res.data.message);
-            })
-        } catch (err) {
-            if (err) console.log(err)
-        }
+    function clickLoginButton() {
+        login(email, password).then(info => {
+            setUserInfo(info);
+        });
+    }
+
+    function clickSignupButton() {
+        signup(email, password).then(info => {
+            setUserInfo(info);
+        });
     }
 
     return (
         <div className="App">
-            <button onClick={() => sendRequest()}>Click</button>
+            {Object.keys(userInfo).length > 0 && <div>{userInfo.email}</div>}
+            <div>
+                <span>Email</span>
+                <input onChange={e => setEmail(e.target.value)}/>
+            </div>
+            <div>
+                <span>Password</span>
+                <input onChange={e => setPassword(e.target.value)}/>
+            </div>
+            <div>
+                <button onClick={() => clickLoginButton()}>Log In</button>
+                <button onClick={() => clickSignupButton()}>Sign Up</button>
+            </div>
+
         </div>
     );
 }
