@@ -1,6 +1,7 @@
 import './App.css';
 import {login, signup} from "./lib/server/post";
 import {useState} from "react";
+import LoginButton from "./component/buttons/LoginButton";
 
 function App() {
     const [email, setEmail] = useState('');
@@ -31,8 +32,8 @@ function App() {
                 <input onChange={e => setPassword(e.target.value)}/>
             </div>
             <div>
-                <button onClick={() => clickLoginButton()}>Log In</button>
-                <button onClick={() => clickSignupButton()}>Sign Up</button>
+                <LoginButton text={'Log In'} clickLogin={clickLoginButton}/>
+                <LoginButton text={'Sign In'} clickLogin={clickSignupButton}/>
             </div>
 
         </div>
