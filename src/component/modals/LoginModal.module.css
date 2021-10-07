@@ -1,0 +1,47 @@
+.modal-wrap {
+    position: fixed;
+    z-index: 1000;
+
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 50%;
+    border-radius: 1rem;
+    border: 1px solid darkgrey;
+    background-color: white;
+
+    display: inline-block;
+    padding: 1rem;
+}
+
+.modal-header {
+}
+
+.top-close {
+    float: right;
+    border: none;
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 2em;
+}
+.close:hover{
+    color: lightgrey;
+    cursor: pointer;
+}
+
+.modal-title {
+
+}
+
+.modal-body {
+
+}
+
+.modal-footer {
+}
+
+.btn-close {
+    clear: left;
+    float: right;
+}

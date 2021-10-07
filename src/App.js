@@ -1,41 +1,30 @@
 import './App.css';
-import {login, signup} from "./lib/server/post";
 import {useState} from "react";
 import LoginButton from "./component/buttons/LoginButton";
+import LoginModal from "./component/modals/LoginModal";
 
 function App() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [openModal, setOpenModal] = useState(false);
     const [userInfo, setUserInfo] = useState({});
 
-    function clickLoginButton() {
-        login(email, password).then(info => {
-            setUserInfo(info);
-        });
+    function openLoginModal() {
+        setOpenModal(true);
     }
 
-    function clickSignupButton() {
-        signup(email, password).then(info => {
-            setUserInfo(info);
-        });
+    function closeLoginModal() {
+        setOpenModal(false);
     }
 
     return (
         <div className="App">
+            {openModal
+            && <section>
+                <LoginModal setUserInfo={setUserInfo} closeModal={closeLoginModal}/>
+                <div className={`modal-background`}/>
+            </section>
+            }
+            <LoginButton text={'Log In'} clickLogin={openLoginModal}/>
             {Object.keys(userInfo).length > 0 && <div>{userInfo.email}</div>}
-            <div>
-                <span>Email</span>
-                <input onChange={e => setEmail(e.target.value)}/>
-            </div>
-            <div>
-                <span>Password</span>
-                <input onChange={e => setPassword(e.target.value)}/>
-            </div>
-            <div>
-                <LoginButton text={'Log In'} clickLogin={clickLoginButton}/>
-                <LoginButton text={'Sign In'} clickLogin={clickSignupButton}/>
-            </div>
-
         </div>
     );
 }
