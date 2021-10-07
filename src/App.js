@@ -15,16 +15,36 @@ function App() {
         setOpenModal(false);
     }
 
+    function logout() {
+        setUserInfo({})
+    }
+
+    function renderModal() {
+        if (openModal) {
+            return <>
+                <section>
+                    <LoginModal setUserInfo={setUserInfo} closeModal={closeLoginModal}/>
+                    <div className={`modal-background`}/>
+                </section>
+            </>
+        }
+    }
+
+    function render(){
+        if (Object.keys(userInfo).length) {
+            return <>
+                <LoginButton text={'Log out'} clickLogin={logout}/>
+                <div>{userInfo.email}</div>
+            </>
+        } else {
+            return <LoginButton text={'Log in'} clickLogin={openLoginModal}/>
+        }
+    }
+
     return (
         <div className="App">
-            {openModal
-            && <section>
-                <LoginModal setUserInfo={setUserInfo} closeModal={closeLoginModal}/>
-                <div className={`modal-background`}/>
-            </section>
-            }
-            <LoginButton text={'Log In'} clickLogin={openLoginModal}/>
-            {Object.keys(userInfo).length > 0 && <div>{userInfo.email}</div>}
+            {render()}
+            {renderModal()}
         </div>
     );
 }

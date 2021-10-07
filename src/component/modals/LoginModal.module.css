@@ -11,13 +11,11 @@
     border: 1px solid darkgrey;
     background-color: white;
 
-    display: inline-block;
-    padding: 1rem;
+    padding: 1rem 2rem;
 }
 
 .modal-header {
 }
-
 .top-close {
     float: right;
     border: none;
@@ -29,16 +27,19 @@
     color: lightgrey;
     cursor: pointer;
 }
-
 .modal-title {
 
 }
 
 .modal-body {
-
+}
+.input{
+    width: 70%;
+    height: 2rem;
 }
 
 .modal-footer {
+    padding: 1rem;
 }
 
 .btn-close {

@@ -36,12 +36,14 @@ function LoginModal({setUserInfo, closeModal}) {
         </section>
         <section className={styles['modal-body']}>
             <div>
-                <span>Email</span>
-                <input onChange={e => setEmail(e.target.value)}/>
+                <div>Email</div>
+                <input className={styles['input']}
+                       onChange={e => setEmail(e.target.value)}/>
             </div>
             <div>
-                <span>Password</span>
-                <input onChange={e => setPassword(e.target.value)}/>
+                <div>Password</div>
+                <input className={styles['input']}
+                       onChange={e => setPassword(e.target.value)}/>
             </div>
         </section>
         <section className={styles['modal-footer']}>
