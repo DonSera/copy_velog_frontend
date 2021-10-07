@@ -4,15 +4,16 @@ import LoginButton from "./component/buttons/LoginButton";
 import LoginModal from "./component/modals/LoginModal";
 
 function App() {
-    const [openModal, setOpenModal] = useState(false);
+    const [openModal, setOpenModal] = useState({bool: false, title: ''});
     const [userInfo, setUserInfo] = useState({});
 
-    function openLoginModal() {
-        setOpenModal(true);
+    function openLoginModal(title) {
+        setOpenModal({bool: true, title: title});
+
     }
 
     function closeLoginModal() {
-        setOpenModal(false);
+        setOpenModal({bool: false, title: ''});
     }
 
     function logout() {
@@ -20,24 +21,31 @@ function App() {
     }
 
     function renderModal() {
-        if (openModal) {
+        if (openModal.bool) {
             return <>
                 <section>
-                    <LoginModal setUserInfo={setUserInfo} closeModal={closeLoginModal}/>
+                    <LoginModal title={openModal.title}
+                                setUserInfo={setUserInfo}
+                                closeModal={closeLoginModal}/>
                     <div className={`modal-background`}/>
                 </section>
             </>
         }
     }
 
-    function render(){
+    function render() {
         if (Object.keys(userInfo).length) {
             return <>
                 <LoginButton text={'Log out'} clickLogin={logout}/>
                 <div>{userInfo.email}</div>
             </>
         } else {
-            return <LoginButton text={'Log in'} clickLogin={openLoginModal}/>
+            return <>
+                <LoginButton text={'Log in'}
+                             clickLogin={() => openLoginModal('Log in')}/>
+                <LoginButton text={'Sign up'}
+                             clickLogin={() => openLoginModal('Sign up')}/>
+            </>
         }
     }
 
