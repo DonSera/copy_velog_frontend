@@ -1,7 +1,8 @@
 import './App.css';
 import {useState} from "react";
 import LoginButton from "./component/buttons/LoginButton";
-import LoginModal from "./component/modals/LoginModal";
+import Modal from "./component/modals/Modal";
+import LoginComponent from "./component/Login/Login";
 
 function App() {
     const [openModal, setOpenModal] = useState({bool: false, title: ''});
@@ -21,10 +22,12 @@ function App() {
     }
 
     function renderModal() {
+        const LoginComp = LoginComponent(openModal.title, setUserInfo, closeLoginModal)
         if (openModal.bool) {
-            return <LoginModal title={openModal.title}
-                               setUserInfo={setUserInfo}
-                               closeModal={closeLoginModal}/>
+            return <Modal closeModal={closeLoginModal}
+                          header={LoginComp.header}
+                          body={LoginComp.body}
+                          footer={LoginComp.footer}/>
         }
     }
 

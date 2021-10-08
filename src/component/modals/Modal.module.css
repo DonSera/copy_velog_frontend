@@ -27,6 +27,7 @@
 
 .modal-header {
 }
+
 .top-close {
     float: right;
     border: none;
@@ -34,26 +35,23 @@
     font-weight: bold;
     font-size: 2em;
 }
-.close:hover{
+
+.top-close:hover {
     color: lightgrey;
     cursor: pointer;
 }
-.modal-title {
 
-}
 
 .modal-body {
 }
-.input{
-    width: 70%;
-    height: 2rem;
-}
+
 
 .modal-footer {
     padding: 1rem;
+    clear: left;
+    float: right;
 }
 
 .btn-close {
-    clear: left;
-    float: right;
+
 }
