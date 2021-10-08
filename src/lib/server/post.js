@@ -21,12 +21,7 @@ function organizeInfo(postInfo) {
     return postData;
 }
 
-export async function login(email, password) {
-    const postInfo = await post('login', email, password);
-    return organizeInfo(postInfo);
-}
-
-export async function signup(email, password) {
-    const postInfo = await post('signup', email, password);
+export async function loginSignup(type, email, password) {
+    const postInfo = await post(type, email, password);
     return organizeInfo(postInfo);
 }

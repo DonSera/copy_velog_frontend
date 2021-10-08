@@ -1,10 +1,10 @@
 import styles from './Login.module.css'
 import LoginButton from "../buttons/LoginButton";
-import {login, signup} from "../../lib/server/post";
+import {loginSignup} from "../../lib/server/post";
 import {useState} from "react";
 
 function LoginHeader({title}) {
-    return <h4 className={styles['title']}>{title}</h4>
+    return <h4 className={styles['title']}>{title}</h4>;
 }
 
 function LoginBody({email, password, setEmail, setPassword}) {
@@ -21,11 +21,11 @@ function LoginBody({email, password, setEmail, setPassword}) {
                    value={password}
                    onChange={e => setPassword(e.target.value)}/>
         </div>
-    </>
+    </>;
 }
 
 function LoginFooter({title, clickButton}) {
-    return <LoginButton text={title} clickLogin={clickButton}/>
+    return <LoginButton text={title} clickLogin={clickButton}/>;
 }
 
 
@@ -33,42 +33,30 @@ function LoginComponent(title, setUserInfo, closeModal) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    function clickLoginButton() {
-        login(email, password).then(data => {
+    function clickButton() {
+        let type = 'login';
+        if (title === 'Sign up') {
+            type = 'signup'
+        }
+        loginSignup(type, email, password).then(data => {
             if (data.message.includes('success')) {
                 setUserInfo(data.userInfo);
                 closeModal();
+                setEmail('');
+            } else {
+                if (data.message.includes('email')) {
+                    setEmail('');
+                }
+                alert(data.message);
             }
-            setEmail('')
-            setPassword('')
+            setPassword('');
         });
-    }
-
-    function clickSignupButton() {
-        signup(email, password).then(data => {
-            if (data.message.includes('success')) {
-                setUserInfo(data.userInfo);
-                closeModal();
-            }
-            setEmail('')
-            setPassword('')
-        });
-    }
-
-    function clickButton(type) {
-        if (type === "Log in") {
-            clickLoginButton();
-        }
-
-        if (type === "Sign up") {
-            clickSignupButton();
-        }
     }
 
     return {
         header: <LoginHeader title={title}/>,
         body: <LoginBody email={email} password={password} setEmail={setEmail} setPassword={setPassword}/>,
-        footer: <LoginFooter title={title} clickButton={() => clickButton(title)}/>
+        footer: <LoginFooter title={title} clickButton={clickButton}/>
     }
 }
 
