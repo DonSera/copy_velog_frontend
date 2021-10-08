@@ -7,7 +7,7 @@ function LoginHeader({title}) {
     return <h4 className={styles['title']}>{title}</h4>;
 }
 
-function LoginBody({email, password, setEmail, setPassword}) {
+function LoginBody({email, password, setEmail, setPassword, enterKey}) {
     return <>
         <div>
             <div>Email</div>
@@ -19,7 +19,8 @@ function LoginBody({email, password, setEmail, setPassword}) {
             <div>Password</div>
             <input className={styles['input']}
                    value={password}
-                   onChange={e => setPassword(e.target.value)}/>
+                   onChange={e => setPassword(e.target.value)}
+                   onKeyUp={enterKey}/>
         </div>
     </>;
 }
@@ -29,9 +30,22 @@ function LoginFooter({title, clickButton}) {
 }
 
 
-function LoginComponent(title, setUserInfo, closeModal) {
+function LoginComponent(title, setUserInfo, setModalInfo) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    function openLoginModal(title) {
+        setModalInfo({open: true, title: title});
+
+    }
+
+    function closeLoginModal() {
+        setModalInfo({open: false, title: ''});
+    }
+
+    function logout() {
+        setUserInfo({});
+    }
 
     function clickButton() {
         let type = 'login';
@@ -41,7 +55,7 @@ function LoginComponent(title, setUserInfo, closeModal) {
         loginSignup(type, email, password).then(data => {
             if (data.message.includes('success')) {
                 setUserInfo(data.userInfo);
-                closeModal();
+                closeLoginModal();
                 setEmail('');
             } else {
                 if (data.message.includes('email')) {
@@ -53,9 +67,28 @@ function LoginComponent(title, setUserInfo, closeModal) {
         });
     }
 
+    function enterKey() {
+        if (window.event.keyCode === 13) {
+            clickButton();
+        }
+    }
+
     return {
+        button: {
+            logged: <LoginButton text={'Log out'} clickLogin={logout}/>,
+            notLogged: <>
+                <LoginButton text={'Log in'}
+                             clickLogin={() => openLoginModal('Log in')}/>
+                <LoginButton text={'Sign up'}
+                             clickLogin={() => openLoginModal('Sign up')}/>
+            </>
+        },
         header: <LoginHeader title={title}/>,
-        body: <LoginBody email={email} password={password} setEmail={setEmail} setPassword={setPassword}/>,
+        body: <LoginBody email={email}
+                         password={password}
+                         setEmail={setEmail}
+                         setPassword={setPassword}
+                         enterKey={enterKey}/>,
         footer: <LoginFooter title={title} clickButton={clickButton}/>
     }
 }

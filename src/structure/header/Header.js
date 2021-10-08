@@ -1,23 +1,14 @@
 import styles from './Header.module.css'
-import LoginButton from "../../component/buttons/LoginButton";
 import {useState} from "react";
 
-function Header({userInfo, logout, openLoginModal}) {
+function Header({userInfo, loginInfo}) {
     const [openMenu, setOpenMenu] = useState(false);
 
     function renderLoginButton() {
         if (Object.keys(userInfo).length) {
-            return <>
-                <LoginButton text={'Log out'} clickLogin={logout}/>
-                <div>{userInfo.email}</div>
-            </>;
+            return loginInfo.button.logged;
         } else {
-            return <>
-                <LoginButton text={'Log in'}
-                             clickLogin={() => openLoginModal('Log in')}/>
-                <LoginButton text={'Sign up'}
-                             clickLogin={() => openLoginModal('Sign up')}/>
-            </>;
+            return loginInfo.button.notLogged;
         }
     }
 
@@ -30,6 +21,7 @@ function Header({userInfo, logout, openLoginModal}) {
                     </button>
                 </span>
                 <span className={styles['login-box']}>
+                    {userInfo.email}
                     {renderLoginButton()}
                 </span>
             </div>
