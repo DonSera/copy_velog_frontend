@@ -22,14 +22,9 @@ function App() {
 
     function renderModal() {
         if (openModal.bool) {
-            return <>
-                <section>
-                    <LoginModal title={openModal.title}
-                                setUserInfo={setUserInfo}
-                                closeModal={closeLoginModal}/>
-                    <div className={`modal-background`}/>
-                </section>
-            </>
+            return <LoginModal title={openModal.title}
+                               setUserInfo={setUserInfo}
+                               closeModal={closeLoginModal}/>
         }
     }
 
