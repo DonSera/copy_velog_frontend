@@ -1,6 +1,9 @@
 import styles from './Login.module.css'
+import {useSelector, useDispatch} from "react-redux";
+import {login} from "../../redux/loginSlice";
+
 import LoginButton from "../buttons/LoginButton";
-import {loginSignup} from "../../lib/server/post";
+import {loginRegister} from "../../lib/server/post";
 import {useState} from "react";
 
 function LoginHeader({title}) {
@@ -31,6 +34,10 @@ function LoginFooter({title, clickButton}) {
 
 
 function LoginComponent(title, setUserInfo, setModalInfo) {
+    const userInfo = useSelector(state => state.userInfo);
+    console.log(userInfo.email)
+    const dispatch = useDispatch();
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -52,8 +59,12 @@ function LoginComponent(title, setUserInfo, setModalInfo) {
         if (title === 'Sign up') {
             type = 'signup'
         }
-        loginSignup(type, email, password).then(data => {
+        loginRegister(type, email, password).then(data => {
             if (data.message.includes('success')) {
+                dispatch(login({
+                    email: data.userInfo.email,
+                    name: data.userInfo.name
+                }));
                 setUserInfo(data.userInfo);
                 closeLoginModal();
                 setEmail('');
@@ -75,8 +86,12 @@ function LoginComponent(title, setUserInfo, setModalInfo) {
 
     return {
         button: {
-            logged: <LoginButton text={'Log out'} clickLogin={logout}/>,
+            logged: <>
+                <span>{userInfo.email}</span>
+                <LoginButton text={'Log out'} clickLogin={logout}/>
+            </>,
             notLogged: <>
+                <span>{userInfo.email}</span>
                 <LoginButton text={'Log in'}
                              clickLogin={() => openLoginModal('Log in')}/>
                 <LoginButton text={'Sign up'}
