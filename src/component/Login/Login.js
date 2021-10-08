@@ -1,4 +1,4 @@
-import styles from "../modals/Modal.module.css";
+import styles from './Login.module.css'
 import LoginButton from "../buttons/LoginButton";
 import {login, signup} from "../../lib/server/post";
 import {useState} from "react";
