@@ -1,6 +1,6 @@
 import styles from './Login.module.css'
 import {useDispatch} from "react-redux";
-import {login,logout} from "../../redux/loginSlice";
+import {login, logout} from "../../redux/loginSlice";
 
 import LoginButton from "../buttons/LoginButton";
 import {loginRegister} from "../../lib/server/post";
@@ -8,25 +8,29 @@ import {useState} from "react";
 
 
 function LoginComponent(title, setModalInfo) {
+    // 로그인 및 회원가입 관련 컴포넌트 및 함수
     const dispatch = useDispatch();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     function openLoginModal(title) {
+        // 모달 띄우기
         setModalInfo({open: true, title: title});
-
     }
 
     function closeLoginModal() {
+        // 모달 내리기
         setModalInfo({open: false, title: ''});
     }
 
     function logoutClick() {
+        // 로그아웃
         dispatch(logout())
     }
 
     function clickButton() {
+        // 로그인 또는 회원가입
         let type = 'login';
         if (title === 'Sign up') {
             type = 'signup'
@@ -50,6 +54,7 @@ function LoginComponent(title, setModalInfo) {
     }
 
     function enterKey() {
+        // 비밀번호 누르고 enter 치면 아래 버튼 자동으로 눌리게
         if (window.event.keyCode === 13) {
             clickButton();
         }

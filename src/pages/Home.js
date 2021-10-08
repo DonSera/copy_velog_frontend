@@ -7,13 +7,13 @@ function Home() {
     const [modalInfo, setModalInfo] = useState({open: false, title: ''});
     const LoginComp = LoginComponent(modalInfo.title,setModalInfo)
 
-    function closeLoginModal() {
+    function closeModal() {
         setModalInfo({open: false, title: ''});
     }
 
     function renderModal() {
         if (modalInfo.open) {
-            return <Modal closeModal={closeLoginModal}
+            return <Modal closeModal={closeModal}
                           header={LoginComp.header}
                           body={LoginComp.body}
                           footer={LoginComp.footer}/>
