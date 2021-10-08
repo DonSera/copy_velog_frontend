@@ -1,0 +1,69 @@
+.header-wrap {
+    margin: auto;
+    width: 80%;
+    height: 109px;
+
+    background-color: wheat;
+}
+
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: cornflowerblue;
+}
+
+.logo-box {
+    margin: 5px;
+}
+
+.logo-button {
+    font-size: 2rem;
+    border: transparent;
+    background-color: transparent;
+    font-weight: bold;
+}
+
+.login-box {
+    margin: 5px;
+}
+
+.header-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: lightskyblue;
+}
+
+.section {
+    margin: 5px 10px;
+}
+
+.menu {
+    margin: 5px 10px;
+}
+
+.example-button {
+    font-size: 1rem;
+    border: transparent;
+    background-color: transparent;
+    font-weight: bold;
+}
+
+.menu-board {
+    float: right;
+    background: white;
+    border: 1px solid lightgrey;
+
+    box-shadow: lightgrey 0 0 8px 0;
+}
+
+.menu-board > button {
+    display: block;
+    font-size: 1rem;
+    border: transparent;
+    background-color: transparent;
+    font-weight: bold;
+
+    padding: 0.5rem 1rem;
+}

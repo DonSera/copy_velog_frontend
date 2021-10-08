@@ -1,8 +1,8 @@
 import './App.css';
 import {useState} from "react";
-import LoginButton from "./component/buttons/LoginButton";
 import Modal from "./component/modals/Modal";
 import LoginComponent from "./component/Login/Login";
+import Header from "./structure/header/Header";
 
 function App() {
     const [modalInfo, setModalInfo] = useState({open: false, title: ''});
@@ -31,25 +31,9 @@ function App() {
         }
     }
 
-    function render() {
-        if (Object.keys(userInfo).length) {
-            return <>
-                <LoginButton text={'Log out'} clickLogin={logout}/>
-                <div>{userInfo.email}</div>
-            </>
-        } else {
-            return <>
-                <LoginButton text={'Log in'}
-                             clickLogin={() => openLoginModal('Log in')}/>
-                <LoginButton text={'Sign up'}
-                             clickLogin={() => openLoginModal('Sign up')}/>
-            </>
-        }
-    }
-
     return (
         <div className="App">
-            {render()}
+            <Header userInfo={userInfo} logout={logout} openLoginModal={openLoginModal}/>
             {renderModal()}
         </div>
     );
