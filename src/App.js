@@ -5,16 +5,16 @@ import Modal from "./component/modals/Modal";
 import LoginComponent from "./component/Login/Login";
 
 function App() {
-    const [openModal, setOpenModal] = useState({bool: false, title: ''});
+    const [modalInfo, setModalInfo] = useState({open: false, title: ''});
     const [userInfo, setUserInfo] = useState({});
 
     function openLoginModal(title) {
-        setOpenModal({bool: true, title: title});
+        setModalInfo({open: true, title: title});
 
     }
 
     function closeLoginModal() {
-        setOpenModal({bool: false, title: ''});
+        setModalInfo({open: false, title: ''});
     }
 
     function logout() {
@@ -22,8 +22,8 @@ function App() {
     }
 
     function renderModal() {
-        const LoginComp = LoginComponent(openModal.title, setUserInfo, closeLoginModal)
-        if (openModal.bool) {
+        const LoginComp = LoginComponent(modalInfo.title, setUserInfo, closeLoginModal)
+        if (modalInfo.open) {
             return <Modal closeModal={closeLoginModal}
                           header={LoginComp.header}
                           body={LoginComp.body}
