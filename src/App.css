@@ -1,2 +1,6 @@
 .App {
 }
+
+button:hover{
+    cursor: pointer;
+}
