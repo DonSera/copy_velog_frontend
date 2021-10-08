@@ -1,31 +1,28 @@
 import './App.css';
-import {useState} from "react";
-import Modal from "./component/modals/Modal";
-import LoginComponent from "./component/Login/Login";
-import Header from "./structure/header/Header";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import Home from "./pages/Home";
+import Notice from "./pages/Notice";
+import TagList from "./pages/TagList";
 
 function App() {
-    const [modalInfo, setModalInfo] = useState({open: false, title: ''});
-    const [userInfo, setUserInfo] = useState({});
-    const LoginComp = LoginComponent(modalInfo.title, setUserInfo, setModalInfo)
-
-    function closeLoginModal() {
-        setModalInfo({open: false, title: ''});
-    }
-
-    function renderModal() {
-        if (modalInfo.open) {
-            return <Modal closeModal={closeLoginModal}
-                          header={LoginComp.header}
-                          body={LoginComp.body}
-                          footer={LoginComp.footer}/>
-        }
-    }
-
     return (
         <div className="App">
-            <Header userInfo={userInfo} loginInfo={LoginComp}/>
-            {renderModal()}
+            <Router>
+                <Switch>
+                    <Route exact path={'/'}
+                           component={() =>
+                               <Home/>
+                           }/>
+                    <Route path={`/notice`}
+                           component={() =>
+                               <Notice/>
+                           }/>
+                    <Route path={`/tag_list`}
+                           component={() =>
+                               <TagList/>
+                           }/>
+                </Switch>
+            </Router>
         </div>
     );
 }
