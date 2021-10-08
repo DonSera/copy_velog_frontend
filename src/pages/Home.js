@@ -5,8 +5,7 @@ import Header from "../structure/header/Header";
 
 function Home() {
     const [modalInfo, setModalInfo] = useState({open: false, title: ''});
-    const [userInfo, setUserInfo] = useState({});
-    const LoginComp = LoginComponent(modalInfo.title, setUserInfo, setModalInfo)
+    const LoginComp = LoginComponent(modalInfo.title,setModalInfo)
 
     function closeLoginModal() {
         setModalInfo({open: false, title: ''});
@@ -22,8 +21,7 @@ function Home() {
     }
 
     return <>
-        <Header userInfo={userInfo}
-                loginInfo={LoginComp}/>
+        <Header loginInfo={LoginComp}/>
         {renderModal()}
     </>
 }

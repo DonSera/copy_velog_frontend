@@ -1,17 +1,19 @@
 import styles from './Header.module.css'
 import {useState} from "react";
 import {useHistory} from "react-router-dom";
+import {useSelector} from "react-redux";
 
-function Header({userInfo, loginInfo}) {
-    const [openMenu, setOpenMenu] = useState(false);
+function Header({loginInfo}) {
+    const userInfo = useSelector(state => state.userInfo);
     const history = useHistory();
+    const [openMenu, setOpenMenu] = useState(false);
 
     function historyChange(loc) {
         history.push(`/${loc}`)
     }
 
     function renderLoginButton() {
-        if (Object.keys(userInfo).length) {
+        if (userInfo.email) {
             return loginInfo.button.logged;
         } else {
             return loginInfo.button.notLogged;
