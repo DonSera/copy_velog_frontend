@@ -1,7 +1,9 @@
-import styles from './Login.module.css'
 import {useDispatch} from "react-redux";
 import {login, logout} from "../../redux/loginSlice";
 
+import LoginHeader from "./LoginHeader";
+import LoginBody from "./LoginBody";
+import LoginFooter from "./LoginFooter";
 import LoginButton from "../buttons/LoginButton";
 import {loginRegister} from "../../lib/server/post";
 import {useState} from "react";
@@ -62,9 +64,7 @@ function LoginComponent(title, setModalInfo) {
 
     return {
         button: {
-            logged: <>
-                <LoginButton text={'Log out'} clickLogin={logoutClick}/>
-            </>,
+            logged: <LoginButton text={'Log out'} clickLogin={logoutClick}/>,
             notLogged: <>
                 <LoginButton text={'Log in'}
                              clickLogin={() => openLoginModal('Log in')}/>
@@ -80,32 +80,6 @@ function LoginComponent(title, setModalInfo) {
                          enterKey={enterKey}/>,
         footer: <LoginFooter title={title} clickButton={clickButton}/>
     }
-}
-
-function LoginHeader({title}) {
-    return <h4 className={styles['title']}>{title}</h4>;
-}
-
-function LoginBody({email, password, setEmail, setPassword, enterKey}) {
-    return <>
-        <div>
-            <div>Email</div>
-            <input className={styles['input']}
-                   value={email}
-                   onChange={e => setEmail(e.target.value)}/>
-        </div>
-        <div>
-            <div>Password</div>
-            <input className={styles['input']}
-                   value={password}
-                   onChange={e => setPassword(e.target.value)}
-                   onKeyUp={enterKey}/>
-        </div>
-    </>;
-}
-
-function LoginFooter({title, clickButton}) {
-    return <LoginButton text={title} clickLogin={clickButton}/>;
 }
 
 export default LoginComponent;
