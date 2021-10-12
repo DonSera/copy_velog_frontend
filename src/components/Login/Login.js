@@ -47,7 +47,7 @@ function LoginComponent(title, setModalInfo) {
     function setStorage(key, value, times) {
         // localStorage 추가하기
         const date = new Date();
-        const object = {value: value, timestamp: date.getTime() + (times * 60 * 60 * 1000)}
+        const object = {value: value, timestamp: date.getTime() + (times * 24 * 60 * 60 * 1000)}
         localStorage.setItem(key, JSON.stringify(object));
     }
 
