@@ -6,7 +6,7 @@ import LoginBody from "./LoginBody";
 import LoginFooter from "./LoginFooter";
 import LoginButton from "../buttons/LoginButton";
 import {loginRegister} from "../../lib/server/post";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 
 function LoginComponent(title, setModalInfo) {
@@ -15,6 +15,29 @@ function LoginComponent(title, setModalInfo) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    useEffect(() => {
+        let cookieEmail = '';
+        let cookiePW = '';
+
+        const cookies = document.cookie.split(';');
+        for (let index = 0; index < cookies.length; index++) {
+            let cookie = cookies[index].trim();
+
+            if (cookie.startsWith('email')) {
+                cookieEmail = cookie.split('=')[1];
+            }
+
+            if (cookie.startsWith('password')) {
+                cookiePW = cookie.split('=')[1];
+            }
+        }
+
+        if (cookieEmail !== '' && cookiePW !== '') {
+            clickButton(cookieEmail, cookiePW);
+        }
+    }, [])
+
 
     function openLoginModal(title) {
         // 모달 띄우기
@@ -26,23 +49,48 @@ function LoginComponent(title, setModalInfo) {
         setModalInfo({open: false, title: ''});
     }
 
-    function logoutClick() {
-        // 로그아웃
-        dispatch(logout())
+    function setCookie(key, value, times, path='/') {
+        // cookie 추가하기
+        let expires = '';
+        if (times) {
+            if (typeof times === "number") {
+                document.cookie = `${key}=${value}; max-age=${times}; path=${path}`;
+            } else {
+                const date = new Date();
+                date.setTime(date.getTime() + (times * 24 * 60 * 60 * 1000));
+                expires = date.toUTCString();
+                document.cookie = `${key}=${value}; expires=${expires}; path=${path}`;
+            }
+        }
     }
 
-    function clickButton() {
+    function deleteCookie(key, path = '/') {
+        document.cookie = `${key}=; max-age=0; path=${path};`;
+    }
+
+    function logoutClick() {
+        // 로그아웃
+        deleteCookie('email');
+        deleteCookie('password');
+        dispatch(logout());
+    }
+
+    function clickButton(emailInfo = email, passwordInfo = password) {
         // 로그인 또는 회원가입
         let type = 'login';
         if (title === 'Sign up') {
-            type = 'signup'
+            type = 'signup';
         }
-        loginRegister(type, email, password).then(data => {
+        loginRegister(type, emailInfo, passwordInfo).then(data => {
             if (data.message.includes('success')) {
+                setCookie('email', emailInfo, '7');
+                setCookie('password', passwordInfo, '7');
+
                 dispatch(login({
                     email: data.userInfo.email,
                     name: data.userInfo.name
                 }));
+
                 closeLoginModal();
                 setEmail('');
             } else {
