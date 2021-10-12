@@ -13,7 +13,7 @@ function LoginBody({email, password, setEmail, setPassword, enterKey}) {
             <input className={styles['input']}
                    value={password}
                    onChange={e => setPassword(e.target.value)}
-                   onKeyUp={enterKey}/>
+                   onKeyUp={e => e.keyCode === 13 && enterKey()}/>
         </div>
     </>;
 }

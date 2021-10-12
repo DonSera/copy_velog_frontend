@@ -91,12 +91,6 @@ function LoginComponent(title, setModalInfo) {
         });
     }
 
-    function enterKey() {
-        // 비밀번호 누르고 enter 치면 아래 버튼 자동으로 눌리게
-        if (window.event.keyCode === 13) {
-            clickButton();
-        }
-    }
 
     return {
         button: {
@@ -113,7 +107,7 @@ function LoginComponent(title, setModalInfo) {
                          password={password}
                          setEmail={setEmail}
                          setPassword={setPassword}
-                         enterKey={enterKey}/>,
+                         enterKey={clickButton}/>,
         footer: <LoginFooter title={title} clickButton={clickButton}/>
     }
 }
