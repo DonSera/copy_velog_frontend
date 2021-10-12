@@ -17,24 +17,19 @@ function LoginComponent(title, setModalInfo) {
     const [password, setPassword] = useState('');
 
     useEffect(() => {
-        let cookieEmail = '';
-        let cookiePW = '';
+        const storageEmail = JSON.parse(localStorage.getItem('email'));
+        const storagePW = JSON.parse(localStorage.getItem('password'));
 
-        const cookies = document.cookie.split(';');
-        for (let index = 0; index < cookies.length; index++) {
-            let cookie = cookies[index].trim();
-
-            if (cookie.startsWith('email')) {
-                cookieEmail = cookie.split('=')[1];
+        if (storageEmail) {
+            const date = new Date()
+            if (storageEmail.timestamp < date.getTime()) {
+                // 지정 시간 넘어가면 로그아웃
+                logoutClick();
+            } else {
+                if (storageEmail.value && storagePW.value) {
+                    clickButton(storageEmail.value, storagePW.value);
+                }
             }
-
-            if (cookie.startsWith('password')) {
-                cookiePW = cookie.split('=')[1];
-            }
-        }
-
-        if (cookieEmail !== '' && cookiePW !== '') {
-            clickButton(cookieEmail, cookiePW);
         }
     }, [])
 
@@ -49,29 +44,22 @@ function LoginComponent(title, setModalInfo) {
         setModalInfo({open: false, title: ''});
     }
 
-    function setCookie(key, value, times, path='/') {
-        // cookie 추가하기
-        let expires = '';
-        if (times) {
-            if (typeof times === "number") {
-                document.cookie = `${key}=${value}; max-age=${times}; path=${path}`;
-            } else {
-                const date = new Date();
-                date.setTime(date.getTime() + (times * 24 * 60 * 60 * 1000));
-                expires = date.toUTCString();
-                document.cookie = `${key}=${value}; expires=${expires}; path=${path}`;
-            }
-        }
+    function setStorage(key, value, times) {
+        // localStorage 추가하기
+        const date = new Date();
+        const object = {value: value, timestamp: date.getTime() + (times * 60 * 60 * 1000)}
+        localStorage.setItem(key, JSON.stringify(object));
     }
 
-    function deleteCookie(key, path = '/') {
-        document.cookie = `${key}=; max-age=0; path=${path};`;
+    function deleteStorage(key) {
+        //localStorage 삭제하기
+        localStorage.removeItem(key);
     }
 
     function logoutClick() {
         // 로그아웃
-        deleteCookie('email');
-        deleteCookie('password');
+        deleteStorage('email');
+        deleteStorage('password');
         dispatch(logout());
     }
 
@@ -83,8 +71,8 @@ function LoginComponent(title, setModalInfo) {
         }
         loginRegister(type, emailInfo, passwordInfo).then(data => {
             if (data.message.includes('success')) {
-                setCookie('email', emailInfo, '7');
-                setCookie('password', passwordInfo, '7');
+                setStorage('email', emailInfo, '7');
+                setStorage('password', passwordInfo, '7');
 
                 dispatch(login({
                     email: data.userInfo.email,
