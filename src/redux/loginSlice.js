@@ -10,10 +10,12 @@ export const loginSlice = createSlice({
         login: (state, action) => {
             state.email = action.payload.email;
             state.name = action.payload.name;
+            state.name = action.payload.id;
         },
-        logout:(state)=>{
+        logout: (state) => {
             state.email = null;
             state.name = null;
+            state.id = null;
         }
     },
 })

@@ -5,7 +5,7 @@ import LoginHeader from "./LoginHeader";
 import LoginBody from "./LoginBody";
 import LoginFooter from "./LoginFooter";
 import LoginButton from "../buttons/LoginButton";
-import {loginRegister} from "../../lib/server/post";
+import {loginRegister, autoLoginRegister} from "../../lib/server/post";
 import {useEffect, useState} from "react";
 
 
@@ -17,17 +17,22 @@ function LoginComponent(title, setModalInfo) {
     const [password, setPassword] = useState('');
 
     useEffect(() => {
-        const storageEmail = JSON.parse(localStorage.getItem('email'));
-        const storagePW = JSON.parse(localStorage.getItem('password'));
+        const storageId = JSON.parse(localStorage.getItem('id'));
 
-        if (storageEmail) {
+        if (storageId) {
             const date = new Date()
-            if (storageEmail.timestamp < date.getTime()) {
+            if (storageId.timestamp < date.getTime()) {
                 // 지정 시간 넘어가면 로그아웃
                 logoutClick();
             } else {
-                if (storageEmail.value && storagePW.value) {
-                    clickButton(storageEmail.value, storagePW.value);
+                if (storageId.value) {
+                    autoLoginRegister('id', storageId.value).then(data => {
+                        dispatch(login({
+                            email: data.email,
+                            name: data.name,
+                            id: data.id,
+                        }));
+                    });
                 }
             }
         }
@@ -58,8 +63,7 @@ function LoginComponent(title, setModalInfo) {
 
     function logoutClick() {
         // 로그아웃
-        deleteStorage('email');
-        deleteStorage('password');
+        deleteStorage('id');
         dispatch(logout());
     }
 
@@ -71,12 +75,12 @@ function LoginComponent(title, setModalInfo) {
         }
         loginRegister(type, emailInfo, passwordInfo).then(data => {
             if (data.message.includes('success')) {
-                setStorage('email', emailInfo, '7');
-                setStorage('password', passwordInfo, '7');
+                setStorage('id', data.id, '7');
 
                 dispatch(login({
-                    email: data.userInfo.email,
-                    name: data.userInfo.name
+                    email: data.email,
+                    name: data.name,
+                    id: data.id,
                 }));
 
                 closeLoginModal();
