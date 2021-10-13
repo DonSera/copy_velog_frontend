@@ -22,6 +22,7 @@ export async function autoLogin(dispatch) {
         }
     } catch (e) {
         console.log(e);
+        localStorage.clear();
     }
 }
 
