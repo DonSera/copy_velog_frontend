@@ -16,6 +16,7 @@ export async function autoLogin(dispatch) {
                         name: data.name,
                         id: data.id,
                     }));
+                    console.log(data.message);
                 }
             }
         }
@@ -33,6 +34,7 @@ export async function clickLogin(type, email, password, dispatch) {
             name: data.name,
             id: data.id,
         }));
+        console.log(data.message);
     }
     return data.message;
 }

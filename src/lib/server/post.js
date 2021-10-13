@@ -8,13 +8,9 @@ async function post(url, object) {
 }
 
 export async function loginRegister(type, email, password) {
-    const postInfo = await post(type, {email: email, password: password});
-    console.log(postInfo.message)
-    return postInfo;
+    return await post(type, {email: email, password: password});
 }
 
 export async function autoLoginRegister(type, id) {
-    const postInfo = await post(type, {id: id});
-    console.log(postInfo.message);
-    return postInfo;
+    return await post(type, {id: id});
 }
