@@ -1,7 +1,6 @@
 import LoginHeader from "./LoginHeader";
 import LoginBody from "./LoginBody";
 import LoginFooter from "./LoginFooter";
-import LoginButton from "../buttons/LoginButton";
 import {autoLogin, clickLogin, clickLogout} from "../../lib/login/LoginBusiness";
 import {useDispatch} from "react-redux";
 import {useEffect, useState} from "react";
@@ -66,11 +65,8 @@ function LoginComponent(title, setModalInfo) {
 
     return {
         button: {
-            logged: <LoginButton text={'Log out'} clickLogin={logoutClick}/>,
-            notLogged: <>
-                <LoginButton text={'Log in'} clickLogin={openLoginModal}/>
-                <LoginButton text={'Sign up'} clickLogin={openLoginModal}/>
-            </>
+            logged: logoutClick,
+            notLogged: openLoginModal,
         },
         header: <LoginHeader title={title}/>,
         body: <LoginBody email={email}
