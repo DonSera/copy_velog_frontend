@@ -17,7 +17,7 @@ function Header({loginInfo, handleHistory}) {
     }
 
     function logoutClick() {
-        loginInfo.button.logged();
+        loginInfo.buttonFunction.logged();
         handleMenu('my page');
     }
 
@@ -34,8 +34,8 @@ function Header({loginInfo, handleHistory}) {
             </>
         } else {
             return <>
-                <LoginButton text={'Log in'} clickLogin={loginInfo.button.notLogged}/>
-                <LoginButton text={'Sign up'} clickLogin={loginInfo.button.notLogged}/>
+                <LoginButton text={'Log in'} clickLogin={loginInfo.buttonFunction.notLogged}/>
+                <LoginButton text={'Sign up'} clickLogin={loginInfo.buttonFunction.notLogged}/>
             </>
         }
     }

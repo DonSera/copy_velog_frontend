@@ -64,7 +64,7 @@ function LoginComponent(title, setModalInfo) {
 
 
     return {
-        button: {
+        buttonFunction: {
             logged: logoutClick,
             notLogged: openLoginModal,
         },
