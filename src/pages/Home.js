@@ -1,11 +1,17 @@
 import {useState} from "react";
-import LoginComponent from "../components/Login/Login";
+import {useHistory} from "react-router-dom";
+import LoginComponent from "../components/Login/LoginComponent";
 import Modal from "../components/modals/Modal";
 import Header from "../structure/header/Header";
 
 function Home() {
     const [modalInfo, setModalInfo] = useState({open: false, title: ''});
-    const LoginComp = LoginComponent(modalInfo.title,setModalInfo)
+    const LoginComp = LoginComponent(modalInfo.title, setModalInfo);
+    const history = useHistory();
+
+    function historyChange(loc) {
+        history.push(`/${loc}`);
+    }
 
     function closeModal() {
         setModalInfo({open: false, title: ''});
@@ -21,7 +27,7 @@ function Home() {
     }
 
     return <>
-        <Header loginInfo={LoginComp}/>
+        <Header loginInfo={LoginComp} handleHistory={historyChange}/>
         {renderModal()}
     </>
 }
