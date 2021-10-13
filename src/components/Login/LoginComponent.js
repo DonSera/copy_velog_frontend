@@ -20,14 +20,9 @@ function LoginComponent(title, setModalInfo) {
     }, []);
 
 
-    function openLoginModal() {
+    function openLoginModal(text) {
         // 로그인 모달 띄우기
-        setModalInfo({open: true, title: "Log in"});
-    }
-
-    function openSignupModal() {
-        // 회원가입 모달 띄우기
-        setModalInfo({open: true, title: "Sign up"});
+        setModalInfo({open: true, title: text});
     }
 
     function closeLoginModal() {
@@ -40,14 +35,24 @@ function LoginComponent(title, setModalInfo) {
         clickLogout(dispatch);
     }
 
-    function loginClick(emailInfo = email, passwordInfo = password) {
+    async function loginClick(emailInfo = email, passwordInfo = password) {
         // 로그인 또는 회원가입
         let type = 'login';
         if (title === 'Sign up') {
             type = 'signup';
         }
 
-        clickLogin(type, emailInfo, passwordInfo, dispatch, setEmail, setPassword, closeLoginModal);
+        const message = await clickLogin(type, emailInfo, passwordInfo, dispatch);
+        if (message.includes('success')) {
+            closeLoginModal();
+            setEmail('');
+        } else {
+            if (message.includes('email')) {
+                setEmail('');
+            }
+            alert(message);
+        }
+        setPassword('');
     }
 
 
@@ -56,7 +61,7 @@ function LoginComponent(title, setModalInfo) {
             logged: <LoginButton text={'Log out'} clickLogin={logoutClick}/>,
             notLogged: <>
                 <LoginButton text={'Log in'} clickLogin={openLoginModal}/>
-                <LoginButton text={'Sign up'} clickLogin={openSignupModal}/>
+                <LoginButton text={'Sign up'} clickLogin={openLoginModal}/>
             </>
         },
         header: <LoginHeader title={title}/>,
