@@ -2,7 +2,7 @@ import LoginHeader from "./LoginHeader";
 import LoginBody from "./LoginBody";
 import LoginFooter from "./LoginFooter";
 import LoginButton from "../buttons/LoginButton";
-import {autoLogin, clickLogin, clickLogout} from "./LoginBusiness";
+import {autoLogin, clickLogin, clickLogout} from "../../lib/login/LoginBusiness";
 import {useDispatch} from "react-redux";
 import {useEffect, useState} from "react";
 

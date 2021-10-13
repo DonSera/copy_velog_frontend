@@ -1,4 +1,4 @@
-import {autoLoginRegister, loginRegister} from "../../lib/server/post";
+import {autoLoginRegister, loginRegister} from "../server/post";
 import {login, logout} from "../../redux/loginSlice";
 
 export function autoLogin(dispatch) {
