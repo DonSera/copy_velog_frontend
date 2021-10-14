@@ -1,6 +1,14 @@
 import styles from './Modal.module.css'
+import {useEffect} from "react";
 
 function Modal({header, body, footer, closeModal}) {
+    useEffect(() => {
+        document.onkeydown = function (event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        }
+    })
     return <>
         <div className={styles['modal-background']}/>
         <div className={styles['modal-wrap']}>

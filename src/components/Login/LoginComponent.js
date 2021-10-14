@@ -14,14 +14,6 @@ function LoginComponent(title, setModalInfo) {
     const [password, setPassword] = useState('');
 
     useEffect(() => {
-        document.onkeydown = function (event) {
-            if (event.key === 'Escape') {
-                closeLoginModal();
-            }
-        }
-    })
-
-    useEffect(() => {
         // localStorage의 id 값으로 자동 로그인
         autoLogin(dispatch).then();
     }, [dispatch]);
