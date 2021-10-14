@@ -15,6 +15,11 @@ export async function autoLoginRegister(id) {
     return await post('id', {id: id});
 }
 
-export async function userNameRegister(id, newName) {
-    return await post('newName', {id: id, name: newName});
+export async function userNameRegister(id, email, password, newName) {
+    return await post('newName', {
+        id: id,
+        email: email,
+        password: password,
+        name: newName
+    });
 }
