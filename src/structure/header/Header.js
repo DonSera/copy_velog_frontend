@@ -1,5 +1,5 @@
 import styles from './Header.module.css'
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {useSelector} from "react-redux";
 import LoginButton from "../../components/buttons/LoginButton";
 
@@ -8,12 +8,35 @@ function Header({loginInfo, handleHistory}) {
     const [openMenu, setOpenMenu] = useState(false);
     const [openMyPageMenu, setOpenMyPageMenu] = useState(false);
 
+    const menuRef = useRef(null);
+
+    useEffect(() => {
+        if (openMyPageMenu || openMenu) {
+            // 해당 파일이 열려 있을 때만 listener를 실행한다.
+            window.addEventListener('click', handleRef);
+            return () => {
+                window.removeEventListener('click', handleRef);
+            }
+        }
+    },)
+
+    function handleRef(e) {
+        // 현재 내가 지정한 위치가(menuRef) 내가 클릭(click)한 곳에 포함이 되는가
+        // Ref의 current 값을 존재하지 않을 수 있으므로 ?를 사용한다.
+        if ((openMyPageMenu || openMenu) && !menuRef.current?.contains(e.target)) {
+            openMenu && handleMenu();
+            openMyPageMenu && handleMenu('my page');
+        }
+    }
+
     function handleMenu(type = 'menu') {
         if (type === 'my page') {
             setOpenMyPageMenu(!openMyPageMenu);
         } else {
             setOpenMenu(!openMenu);
         }
+        // ref 값이 존재하는 경우 비운다.
+        if (!menuRef.current) menuRef.current = null;
     }
 
     function logoutClick() {
@@ -41,7 +64,7 @@ function Header({loginInfo, handleHistory}) {
     }
 
     function menu() {
-        return <span className={styles['menu-board']}>
+        return <span className={styles['menu-board']} ref={menuRef}>
                     <button type={"button"}
                             onClick={() => handleHistory('notice')}>
                         공지사항
@@ -56,7 +79,7 @@ function Header({loginInfo, handleHistory}) {
     }
 
     function myPageMenu() {
-        return <span className={styles['menu-board']}>
+        return <span className={styles['menu-board']} ref={menuRef}>
                     <button>내 벨로그</button>
                     <button>임시 글</button>
                     <button>읽기 목록</button>
