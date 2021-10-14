@@ -8,7 +8,7 @@ function MySetting() {
     const userInfo = useSelector(state => state.userInfo);
     const history = useHistory();
     const [modalInfo, setModalInfo] = useState({open: false, title: ''});
-    const SetUsrInfo = SettingUserInfo(userInfo.id, userInfo.name, closeModal);
+    const SetUsrInfo = SettingUserInfo(userInfo.id, userInfo.email, userInfo.name, closeModal);
 
     function handleHistory(loc) {
         history.push(`/${loc}`);
