@@ -65,3 +65,7 @@
 
     padding: 0.5rem 1rem;
 }
+
+.menu-board > button:hover {
+    color: rgb(200, 200, 200);
+}
