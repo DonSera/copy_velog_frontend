@@ -3,7 +3,8 @@ import LoginBody from "./LoginBody";
 import LoginFooter from "./LoginFooter";
 import {autoLogin, clickLogin, clickLogout} from "../../lib/login/LoginBusiness";
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
+import {handleFocus} from "../../lib/inputFocus";
 
 
 function LoginComponent(title, setModalInfo) {
@@ -13,6 +14,11 @@ function LoginComponent(title, setModalInfo) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const emailInputRef = useRef(null);
+    const pwInputRef = useRef(null);
+
+    const emailObj = {value: email, setValue: setEmail, ref: emailInputRef};
+    const pwObj = {value: password, setValue: setPassword, ref: pwInputRef};
 
     useEffect(() => {
         // localStorage의 id 값으로 자동 로그인
@@ -50,6 +56,9 @@ function LoginComponent(title, setModalInfo) {
         } else {
             if (message.includes('email')) {
                 setEmail('');
+                handleFocus(emailInputRef);
+            } else {
+                handleFocus(pwInputRef);
             }
             alert(message);
         }
@@ -63,10 +72,8 @@ function LoginComponent(title, setModalInfo) {
             notLogged: openLoginModal,
         },
         header: <LoginHeader title={title}/>,
-        body: <LoginBody email={email}
-                         password={password}
-                         setEmail={setEmail}
-                         setPassword={setPassword}
+        body: <LoginBody email={emailObj}
+                         password={pwObj}
                          enterKey={loginClick}/>,
         footer: <LoginFooter title={title} clickButton={loginClick}/>
     }

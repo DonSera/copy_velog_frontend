@@ -1,19 +1,22 @@
 import styles from './Login.module.css'
 
-function LoginBody({email, password, setEmail, setPassword, enterKey}) {
+function LoginBody({email, password, enterKey}) {
     return <>
         <div>
             <div>Email</div>
             <input className={styles['input']}
-                   value={email}
-                   onChange={e => setEmail(e.target.value)}/>
+                   value={email.value}
+                   onChange={e => email.setValue(e.target.value)}
+                   autoFocus={true}
+                   ref={email.ref}/>
         </div>
         <div>
             <div>Password</div>
             <input className={styles['input']}
-                   value={password}
-                   onChange={e => setPassword(e.target.value)}
-                   onKeyUp={e => e.keyCode === 13 && enterKey()}/>
+                   value={password.value}
+                   onChange={e => password.setValue(e.target.value)}
+                   onKeyUp={e => e.keyCode === 13 && enterKey()}
+                   ref={password.ref}/>
         </div>
     </>;
 }
