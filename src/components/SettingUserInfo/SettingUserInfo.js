@@ -2,7 +2,7 @@ import {useState} from "react";
 import LoginButton from "../buttons/LoginButton";
 import {userNameRegister} from "../../lib/server/post";
 import {useDispatch} from "react-redux";
-import {changeName} from "../../redux/loginSlice";
+import {changeName} from "../../redux/userInfo";
 
 function Body({list}) {
     function render() {

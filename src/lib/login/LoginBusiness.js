@@ -1,5 +1,6 @@
 import {autoLoginRegister, loginRegister} from "../server/post";
-import {login, logout} from "../../redux/loginSlice";
+import {userLogin, userLogout} from "../../redux/userInfo";
+import {stateLogin, stateLogout} from "../../redux/loginState";
 
 export async function autoLogin(dispatch) {
     try {
@@ -11,12 +12,7 @@ export async function autoLogin(dispatch) {
             } else {
                 if (storageId.value) {
                     const data = await autoLoginRegister(storageId.value);
-                    dispatch(login({
-                        email: data.email,
-                        name: data.name,
-                        id: data.id,
-                    }));
-                    console.log(data.message);
+                    loginSetState(dispatch, data);
                 }
             }
         }
@@ -30,19 +26,25 @@ export async function clickLogin(type, email, password, dispatch) {
     const data = await loginRegister(type, email, password);
     if (data.message.includes('success')) {
         setStorage('id', data.id, '7'); // 7일 저장하기
-        dispatch(login({
-            email: data.email,
-            name: data.name,
-            id: data.id,
-        }));
-        console.log(data.message);
+        loginSetState(dispatch, data);
     }
     return data.message;
 }
 
+function loginSetState(dispatch, data) {
+    dispatch(userLogin({
+        email: data.email,
+        name: data.name,
+        id: data.id,
+    }));
+    dispatch(stateLogin());
+    console.log(data.message);
+}
+
 export function clickLogout(dispatch) {
     deleteStorage('id');
-    dispatch(logout());
+    dispatch(userLogout());
+    dispatch(stateLogout());
     console.log("Log out success");
 }
 
