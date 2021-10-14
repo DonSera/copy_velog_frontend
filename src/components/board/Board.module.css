@@ -7,6 +7,11 @@
     margin: 16px;
 }
 
+.board:hover {
+    transform: translate(0, -10px);
+    transition-duration: 0.5s;
+}
+
 .image {
     height: 167px;
     background-color: wheat;
@@ -42,7 +47,7 @@
         width: calc(100% - 2rem);
     }
 
-    .image{
+    .image {
         background-color: darkolivegreen;
         background-image: none;
     }
