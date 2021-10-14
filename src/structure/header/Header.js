@@ -60,7 +60,10 @@ function Header({loginInfo, handleHistory}) {
                     <button>내 벨로그</button>
                     <button>임시 글</button>
                     <button>읽기 목록</button>
-                    <button>설정</button>
+                    <button type={"button"}
+                            onClick={() => handleHistory(`my_setting`)}>
+                        설정
+                    </button>
                     <button onClick={logoutClick}>로그아웃</button>
                 </span>
     }
