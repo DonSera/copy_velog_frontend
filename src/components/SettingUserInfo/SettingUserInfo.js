@@ -1,52 +1,46 @@
-import {useState} from "react";
+import {useRef, useState} from "react";
 import LoginButton from "../buttons/LoginButton";
 import {userNameRegister} from "../../lib/server/post";
 import {useDispatch} from "react-redux";
 import {changeName} from "../../redux/userInfo";
+import {handleFocus} from "../../lib/inputFocus";
 
-function Body({list}) {
-    function render() {
-        const inputTagList = [];
-        for (let index = 0; index < list.length; index++) {
-            inputTagList.push(
-                <div key={`set_user_info_input_${index}`}>
-                    <div>{list[index][0]}</div>
-                    {list[index][1] === ''
-                        ? <input placeholder={list[index][0] + ' 입력'}
-                                 onChange={e => list[index][2](e.target.value)}/>
-                        : <input placeholder={list[index][1]}
-                                 onChange={e => list[index][2](e.target.value)}/>
-                    }
-
-                </div>
-            )
-        }
-        return inputTagList;
-    }
-
-    return <div>{render()}</div>
-}
-
-function SettingUserInfo(stateId, statName, closeModal) {
+function SettingUserInfo(stateId, stateEmail, stateName, closeModal) {
     const dispatch = useDispatch();
-    const [email, setEmail] = useState('');
     const [pw, setPW] = useState('');
-    const [name, setName] = useState(statName);
+    const [name, setName] = useState(stateName);
+    const inputRef = useRef(null);
 
     async function saveName() {
-        const message = await userNameRegister(stateId, name);
-        dispatch(changeName({name: name}));
+        const message = await userNameRegister(stateId, stateEmail, pw, name);
         console.log(message.message);
-        closeModal();
+        if (message.status) {
+            dispatch(changeName({name: name}));
+            closeModal();
+        } else {
+            setPW('')
+            handleFocus(inputRef);
+            alert(message.message);
+        }
     }
 
     return {
         header: <h4>사용자설정 변경하기</h4>,
-        body: <Body list={[
-            ['Email', email, setEmail],
-            ['Password', pw, setPW],
-            ['변경 닉네임', name, setName]
-        ]}/>,
+        body: <>
+            <div>
+                <div>Password</div>
+                <input placeholder={'비밀번호 입력'}
+                       value={pw}
+                       onChange={e => setPW(e.target.value)}
+                       autoFocus={true}
+                       ref={inputRef}/>
+            </div>
+            <div>
+                <div>새로운 닉네임</div>
+                <input placeholder={name}
+                       onChange={e => setName(e.target.value)}/>
+            </div>
+        </>,
         footer: <LoginButton text={'저장하기'} clickLogin={saveName}/>
     }
 }
