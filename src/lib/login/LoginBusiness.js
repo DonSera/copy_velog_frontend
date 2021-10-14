@@ -10,7 +10,7 @@ export async function autoLogin(dispatch) {
                 clickLogout(dispatch);
             } else {
                 if (storageId.value) {
-                    const data = await autoLoginRegister('id', storageId.value);
+                    const data = await autoLoginRegister(storageId.value);
                     dispatch(login({
                         email: data.email,
                         name: data.name,
