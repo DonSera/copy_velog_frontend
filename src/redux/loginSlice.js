@@ -17,9 +17,12 @@ export const loginSlice = createSlice({
             state.email = null;
             state.name = null;
             state.id = null;
+        },
+        changeName:(state, action) => {
+            state.name = action.payload.name;
         }
     },
 })
 
-export const {login, logout} = loginSlice.actions
+export const {login, logout, changeName} = loginSlice.actions
 export default loginSlice.reducer
