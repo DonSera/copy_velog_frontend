@@ -2,22 +2,24 @@ import LoginHeader from "./LoginHeader";
 import LoginBody from "./LoginBody";
 import LoginFooter from "./LoginFooter";
 import {autoLogin, clickLogin, clickLogout} from "../../lib/login/LoginBusiness";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 
 
 function LoginComponent(title, setModalInfo) {
     // 로그인 및 회원가입 관련 컴포넌트 및 함수
     const dispatch = useDispatch();
+    const loginState = useSelector(state => state.loginState);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     useEffect(() => {
         // localStorage의 id 값으로 자동 로그인
-        autoLogin(dispatch).then();
-    }, [dispatch]);
-
+        if (!loginState.bool) {
+            autoLogin(dispatch).then();
+        }
+    }, [dispatch, loginState.bool]);
 
     function openLoginModal(text) {
         // 로그인 모달 띄우기
