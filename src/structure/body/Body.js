@@ -5,7 +5,7 @@ function Body() {
     function render(num) {
         const boards = [];
         for (let i = 0; i < num; i++) {
-            boards.push(<Board/>)
+            boards.push(<Board key={`body_board_${i}`}/>)
         }
         return boards
     }
