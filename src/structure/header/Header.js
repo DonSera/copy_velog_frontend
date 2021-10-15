@@ -19,7 +19,7 @@ function Header({loginInfo, handleHistory}) {
                 window.removeEventListener('click', handleRef);
             }
         }
-    },)
+    })
 
     function handleRef(e) {
         // 현재 내가 지정한 위치가(menuRef) 내가 클릭(click)한 곳에 포함이 되는가
@@ -43,22 +43,6 @@ function Header({loginInfo, handleHistory}) {
     function logoutClick() {
         loginInfo.buttonFunction.logged();
         handleMenu('my page');
-    }
-
-    function renderLoginButton() {
-        if (userInfo.email) {
-            return <button className={styles['button-right']}
-                           type={"button"}
-                           onClick={() => handleMenu('my page')}>
-                마이페이지
-                {openMyPageMenu && myPageMenu()}
-            </button>
-        } else {
-            return <>
-                <LoginButton text={'Log in'} clickLogin={loginInfo.buttonFunction.notLogged}/>
-                <LoginButton text={'Sign up'} clickLogin={loginInfo.buttonFunction.notLogged}/>
-            </>
-        }
     }
 
     function menu() {
@@ -108,7 +92,20 @@ function Header({loginInfo, handleHistory}) {
             </section>
             <section className={styles['right']}>
                 {userInfo.name}
-                {renderLoginButton()}
+                {userInfo.email
+                    ?
+                    <div>
+                        <button type={"button"}
+                                onClick={() => handleMenu('my page')}>
+                            마이페이지
+                        </button>
+                        {openMyPageMenu && myPageMenu()}
+                    </div>
+                    : <section>
+                        <LoginButton text={'Log in'} clickLogin={loginInfo.buttonFunction.notLogged}/>
+                        <LoginButton text={'Sign up'} clickLogin={loginInfo.buttonFunction.notLogged}/>
+                    </section>
+                }
             </section>
         </section>
         <section className={styles['header-bottom']}>
@@ -118,10 +115,12 @@ function Header({loginInfo, handleHistory}) {
                 <button type={"button"}>일자</button>
             </section>
             <section className={styles['right']}>
-                <button onClick={handleMenu}>
-                    메뉴
+                <div>
+                    <button onClick={handleMenu}>
+                        메뉴
+                    </button>
                     {openMenu && menu()}
-                </button>
+                </div>
             </section>
         </section>
     </div>
