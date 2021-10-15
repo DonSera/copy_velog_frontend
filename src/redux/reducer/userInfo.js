@@ -8,21 +8,21 @@ export const userInfoSlice = createSlice({
         id: null,
     },
     reducers: {
-        userLogin: (state, action) => {
+        login_user: (state, action) => {
             state.email = action.payload.email;
             state.name = action.payload.name;
             state.id = action.payload.id;
         },
-        userLogout: (state) => {
+        logout_user: (state) => {
             state.email = null;
             state.name = null;
             state.id = null;
         },
-        changeName: (state, action) => {
+        change_name: (state, action) => {
             state.name = action.payload.name;
         }
     },
 })
 
-export const {userLogin, userLogout, changeName} = userInfoSlice.actions
+export const {login_user, logout_user, change_name} = userInfoSlice.actions
 export default userInfoSlice.reducer

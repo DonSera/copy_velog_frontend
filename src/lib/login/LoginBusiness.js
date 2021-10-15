@@ -1,6 +1,6 @@
 import {autoLoginRegister, loginRegister} from "../server/post";
-import {userLogin, userLogout} from "../../redux/reducer/userInfo";
-import {stateLogin, stateLogout} from "../../redux/reducer/loginState";
+import {login_user, logout_user} from "../../redux/reducer/userInfo";
+import {state_login, state_logout} from "../../redux/reducer/loginState";
 
 export async function autoLogin(dispatch) {
     try {
@@ -32,19 +32,19 @@ export async function clickLogin(type, email, password, dispatch) {
 }
 
 function loginSetState(dispatch, data) {
-    dispatch(userLogin({
+    dispatch(login_user({
         email: data.email,
         name: data.name,
         id: data.id,
     }));
-    dispatch(stateLogin());
+    dispatch(state_login());
     console.log(data.message);
 }
 
 export function clickLogout(dispatch) {
     deleteStorage('id');
-    dispatch(userLogout());
-    dispatch(stateLogout());
+    dispatch(logout_user());
+    dispatch(state_logout());
     console.log("Log out success");
 }
 

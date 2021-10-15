@@ -6,14 +6,14 @@ export const loginStateSlice = createSlice({
         bool: false
     },
     reducers: {
-        stateLogin: (state) => {
+        state_login: (state) => {
             state.bool = true;
         },
-        stateLogout: (state) => {
+        state_logout: (state) => {
             state.bool = false;
         }
     },
 })
 
-export const {stateLogin, stateLogout} = loginStateSlice.actions
+export const {state_login, state_logout} = loginStateSlice.actions
 export default loginStateSlice.reducer
