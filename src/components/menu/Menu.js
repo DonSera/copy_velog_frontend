@@ -14,6 +14,9 @@ function Menu({config, closeMenu}) {
         window.addEventListener('click', handleRef);
         return () => {
             window.removeEventListener('click', handleRef);
+            if (menuRef.current) {
+                menuRef.current = null;
+            }
         }
     })
 
@@ -29,18 +32,18 @@ function Menu({config, closeMenu}) {
     }
 
     // config = [ [버튼이름, 클릭시 함수], ...]
-    return <div className={styles['menu']}>
-        {config.map((config, index) => {
-            if (config.length > 1) {
+    return <div className={styles['menu']} ref={menuRef}>
+        {config.map((btnInfo, index) => {
+            if (btnInfo.length > 1) {
                 return <button key={`menu_button_${index}`}
                                type={"button"}
-                               onClick={config[1]}>
-                    {config[0]}
+                               onClick={btnInfo[1]}>
+                    {btnInfo[0]}
                 </button>
             } else {
                 return <button key={`menu_button_${index}`}
                                type={"button"}>
-                    {config[0]}
+                    {btnInfo[0]}
                 </button>
             }
         })}

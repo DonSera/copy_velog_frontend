@@ -14,6 +14,9 @@ function Modal({header, body, footer, closeModal}) {
         window.addEventListener('click', handleRef);
         return () => {
             window.removeEventListener('click', handleRef);
+            if(modalRef.current){
+                modalRef.current = null;
+            }
         }
     })
 
