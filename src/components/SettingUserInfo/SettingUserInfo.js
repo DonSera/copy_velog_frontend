@@ -38,7 +38,8 @@ function SettingUserInfo(stateId, stateEmail, stateName, closeModal) {
             <div>
                 <div>새로운 닉네임</div>
                 <input placeholder={name}
-                       onChange={e => setName(e.target.value)}/>
+                       onChange={e => setName(e.target.value)}
+                       onKeyUp={e => e.keyCode === 13 && saveName()}/>
             </div>
         </>,
         footer: <LoginButton text={'저장하기'} clickLogin={saveName}/>
