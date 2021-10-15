@@ -1,17 +1,20 @@
 import styles from './Header.module.css'
 import {useState} from "react";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import LoginButton from "../../components/buttons/LoginButton";
 import Menu from "../../components/menu/Menu";
 import {useHistory} from "react-router-dom";
+import {clickLogout} from "../../lib/login/LoginBusiness";
+import {openLogin} from "../../redux/reducer/modalState";
 
-function Header({loginInfo}) {
+function Header() {
     const history = useHistory();
+    const dispatch = useDispatch();
     const userInfo = useSelector(state => state.userInfo);
     const [openMenu, setOpenMenu] = useState(false);
     const [openMyPageMenu, setOpenMyPageMenu] = useState(false);
 
-    function handleHistory(loc){
+    function handleHistory(loc) {
         history.push(`/${loc}`);
     }
 
@@ -24,8 +27,12 @@ function Header({loginInfo}) {
     }
 
     function logoutClick() {
-        loginInfo.buttonFunction.logout();
+        clickLogout(dispatch);
         handleMyPageMenu();
+    }
+
+    function openClick(text) {
+        dispatch(openLogin({title: text}));
     }
 
     function menu() {
@@ -36,7 +43,7 @@ function Header({loginInfo}) {
 
         function gotoTag() {
             handleMenu();
-            return handleHistory('tag_list')
+            return handleHistory('tag_list');
         }
 
         const menuConfig = [
@@ -84,8 +91,8 @@ function Header({loginInfo}) {
                         {openMyPageMenu && myPageMenu()}
                     </div>
                     : <section>
-                        <LoginButton text={'Log in'} clickLogin={loginInfo.buttonFunction.openModal}/>
-                        <LoginButton text={'Sign up'} clickLogin={loginInfo.buttonFunction.openModal}/>
+                        <LoginButton text={'Log in'} clickLogin={openClick}/>
+                        <LoginButton text={'Sign up'} clickLogin={openClick}/>
                     </section>
                 }
             </section>

@@ -1,21 +1,17 @@
-import {useState} from "react";
-import {useHistory} from "react-router-dom";
 import LoginComponent from "../components/Login/LoginComponent";
 import Modal from "../components/modals/Modal";
 import Header from "../structure/header/Header";
 import Board from "../components/board/Board";
+import {useDispatch, useSelector} from "react-redux";
+import {closeLogin} from "../redux/reducer/modalState";
 
 function Home() {
-    const [modalInfo, setModalInfo] = useState({open: false, title: ''});
-    const LoginComp = LoginComponent(modalInfo.title, setModalInfo);
-    const history = useHistory();
-
-    function historyChange(loc) {
-        history.push(`/${loc}`);
-    }
+    const modalInfo = useSelector(state => state.modalState.login);
+    const dispatch = useDispatch();
+    const LoginComp = LoginComponent(modalInfo.title);
 
     function closeModal() {
-        setModalInfo({open: false, title: ''});
+        dispatch(closeLogin());
     }
 
     function renderModal() {
@@ -30,11 +26,11 @@ function Home() {
         for (let i = 0; i < num; i++) {
             boards.push(<Board key={`body_board_${i}`}/>)
         }
-        return boards
+        return boards;
     }
 
     return <>
-        <Header loginInfo={LoginComp} handleHistory={historyChange}/>
+        <Header/>
         <div id={'homeBody'}>
             <div className={'home-body-wrap'}>
                 {renderBody(7)}

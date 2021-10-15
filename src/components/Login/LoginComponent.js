@@ -1,13 +1,14 @@
 import LoginHeader from "./LoginHeader";
 import LoginBody from "./LoginBody";
 import LoginFooter from "./LoginFooter";
-import {clickLogin, clickLogout} from "../../lib/login/LoginBusiness";
+import {clickLogin} from "../../lib/login/LoginBusiness";
 import {useDispatch} from "react-redux";
 import {useRef, useState} from "react";
 import {handleFocus} from "../../lib/inputFocus";
+import {closeLogin} from "../../redux/reducer/modalState";
 
 
-function LoginComponent(title, setModalInfo) {
+function LoginComponent(title) {
     // 로그인 및 회원가입 관련 컴포넌트 및 함수
     const dispatch = useDispatch();
 
@@ -19,19 +20,9 @@ function LoginComponent(title, setModalInfo) {
     const emailObj = {value: email, setValue: setEmail, ref: emailInputRef};
     const pwObj = {value: password, setValue: setPassword, ref: pwInputRef};
 
-    function openLoginModal(text) {
-        // 로그인 모달 띄우기
-        setModalInfo({open: true, title: text});
-    }
-
     function closeLoginModal() {
         // 모달 내리기
-        setModalInfo({open: false, title: ''});
-    }
-
-    function logoutClick() {
-        // 로그아웃
-        clickLogout(dispatch);
+        dispatch(closeLogin());
     }
 
     async function loginClick(emailInfo = email, passwordInfo = password) {
@@ -59,10 +50,6 @@ function LoginComponent(title, setModalInfo) {
 
 
     return {
-        buttonFunction: {
-            logout: logoutClick,
-            openModal: openLoginModal,
-        },
         header: <LoginHeader title={title}/>,
         body: <LoginBody email={emailObj}
                          password={pwObj}

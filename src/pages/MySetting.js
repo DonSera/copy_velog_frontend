@@ -3,6 +3,7 @@ import {useSelector} from "react-redux";
 import {useState} from "react";
 import Modal from "../components/modals/Modal";
 import SettingUserInfo from "../components/SettingUserInfo/SettingUserInfo";
+import Header from "../structure/header/Header";
 
 function MySetting() {
     const userInfo = useSelector(state => state.userInfo);
@@ -30,6 +31,7 @@ function MySetting() {
     }
 
     return <>
+        <Header/>
         <div>{userInfo.email}</div>
         <div>{userInfo.name}</div>
         <button onClick={openModal}>설정 변경</button>
