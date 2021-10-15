@@ -1,9 +1,0 @@
-.body {
-    /*가운데 정렬*/
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    float: left;
-
-    margin: 0 16px;
-}

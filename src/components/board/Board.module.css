@@ -1,10 +1,10 @@
 .board {
     display: inline-block;
-    width: 320px;
+    width: 314px;
     /*height: 377px;*/
     box-shadow: lightgrey 0 4px 16px 0;
     background-color: lightskyblue;
-    margin: 16px;
+    margin: 15px;
 }
 
 .board:hover {
@@ -17,7 +17,7 @@
     background-color: wheat;
 }
 
-@media (max-width: 1041px) {
+@media (max-width: 1056px) {
     .board {
         margin: 16px;
         width: calc(50% - 2rem);

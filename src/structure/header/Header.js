@@ -92,7 +92,7 @@ function Header({loginInfo, handleHistory}) {
     }
 
     return <>
-        <div className={styles['header-wrap']}>
+        <div id={'header'}>
             <section className={styles['header-top']}>
                 <span className={styles['logo-box']}>
                     <button className={styles['logo-button']}

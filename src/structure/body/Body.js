@@ -10,8 +10,10 @@ function Body() {
         return boards
     }
 
-    return <div className={styles['body']}>
-        {render(10)}
+    return <div id={'body'}>
+        <div className={styles['body-wrap']}>
+            {render(7)}
+        </div>
     </div>
 }
 
