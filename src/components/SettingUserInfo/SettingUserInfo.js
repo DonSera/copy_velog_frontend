@@ -4,7 +4,7 @@ import {userNameRegister} from "../../lib/server/post";
 import {useDispatch, useSelector} from "react-redux";
 import {changeName} from "../../redux/reducer/userInfo";
 import {handleFocus} from "../../lib/inputFocus";
-import {closeLogin} from "../../redux/reducer/modalState";
+import {close_modal} from "../../redux/reducer/modalState";
 
 function SettingUserInfo() {
     const dispatch = useDispatch();
@@ -18,7 +18,7 @@ function SettingUserInfo() {
         console.log(message.message);
         if (message.status) {
             dispatch(changeName({name: name}));
-            dispatch(closeLogin());
+            dispatch(close_modal());
         } else {
             setPW('')
             handleFocus(inputRef);

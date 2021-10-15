@@ -5,7 +5,7 @@ import LoginButton from "../../components/buttons/LoginButton";
 import Menu from "../../components/menu/Menu";
 import {useHistory} from "react-router-dom";
 import {clickLogout} from "../../lib/login/LoginBusiness";
-import {openLogin} from "../../redux/reducer/modalState";
+import {open_modal} from "../../redux/reducer/modalState";
 
 function Header() {
     const history = useHistory();
@@ -32,7 +32,7 @@ function Header() {
     }
 
     function openClick(text) {
-        dispatch(openLogin({title: text}));
+        dispatch(open_modal({title: text}));
     }
 
     function menu() {

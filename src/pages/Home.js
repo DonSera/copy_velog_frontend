@@ -3,15 +3,15 @@ import Modal from "../components/modals/Modal";
 import Header from "../structure/header/Header";
 import Board from "../components/board/Board";
 import {useDispatch, useSelector} from "react-redux";
-import {closeLogin} from "../redux/reducer/modalState";
+import {close_modal} from "../redux/reducer/modalState";
 
 function Home() {
-    const modalInfo = useSelector(state => state.modalState.login);
+    const modalInfo = useSelector(state => state.modalState.modalInfo);
     const dispatch = useDispatch();
     const LoginComp = LoginComponent(modalInfo.title);
 
     function closeModal() {
-        dispatch(closeLogin());
+        dispatch(close_modal());
     }
 
     function renderModal() {

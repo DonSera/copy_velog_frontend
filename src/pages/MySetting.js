@@ -2,21 +2,21 @@ import {useDispatch, useSelector} from "react-redux";
 import Modal from "../components/modals/Modal";
 import SettingUserInfo from "../components/SettingUserInfo/SettingUserInfo";
 import Header from "../structure/header/Header";
-import {closeLogin, openLogin} from "../redux/reducer/modalState";
+import {open_modal, close_modal} from "../redux/reducer/modalState";
 
 function MySetting() {
     const userInfo = useSelector(state => state.userInfo);
-    const modalInfo = useSelector(state => state.modalState.login);
+    const modalInfo = useSelector(state => state.modalState.modalInfo);
     const dispatch = useDispatch();
     const SetUsrInfo = SettingUserInfo();
 
 
     function openModal() {
-        dispatch(openLogin({title: '설정 변경'}));
+        dispatch(open_modal({title: '설정 변경'}));
     }
 
     function closeModal() {
-        dispatch(closeLogin());
+        dispatch(close_modal());
     }
 
     function renderModal() {

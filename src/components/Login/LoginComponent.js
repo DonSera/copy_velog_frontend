@@ -5,7 +5,7 @@ import {clickLogin} from "../../lib/login/LoginBusiness";
 import {useDispatch} from "react-redux";
 import {useRef, useState} from "react";
 import {handleFocus} from "../../lib/inputFocus";
-import {closeLogin} from "../../redux/reducer/modalState";
+import {close_modal} from "../../redux/reducer/modalState";
 
 
 function LoginComponent(title) {
@@ -22,7 +22,7 @@ function LoginComponent(title) {
 
     function closeLoginModal() {
         // 모달 내리기
-        dispatch(closeLogin());
+        dispatch(close_modal());
     }
 
     async function loginClick(emailInfo = email, passwordInfo = password) {
