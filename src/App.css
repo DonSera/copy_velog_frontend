@@ -12,15 +12,25 @@ button:hover {
 }
 
 #header {
-    margin: auto;
+    position: fixed;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+
     width: calc(var(--borad-total-width) * 5);
+    background-color: wheat;
     height: 109px;
 }
 
 #homeBody {
+    padding-top: 110px;
     margin: 0 auto;
     display: flex;
     width: calc(var(--borad-total-width) * 5);
+}
+
+#mySetting {
+    text-align: center;
 }
 
 @media (max-width: 1919px) {
