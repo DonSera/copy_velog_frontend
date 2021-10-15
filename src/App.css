@@ -17,7 +17,7 @@ button:hover {
     height: 109px;
 }
 
-#body {
+#HomeBody {
     margin: 0 auto;
     display: flex;
     width: calc(var(--borad-total-width) * 5);
@@ -28,7 +28,7 @@ button:hover {
         width: calc(var(--borad-total-width) * 4);
     }
 
-    #body {
+    #HomeBody {
         width: calc(var(--borad-total-width) * 4);
     }
 }
@@ -38,7 +38,7 @@ button:hover {
         width: calc(var(--borad-total-width) * 3);
     }
 
-    #body {
+    #HomeBody {
         width: calc(var(--borad-total-width) * 3);
     }
 }
@@ -48,7 +48,7 @@ button:hover {
         width: 100%;
     }
 
-    #body {
+    #HomeBody {
         width: 100%;
     }
 }

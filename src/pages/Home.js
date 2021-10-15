@@ -3,7 +3,7 @@ import {useHistory} from "react-router-dom";
 import LoginComponent from "../components/Login/LoginComponent";
 import Modal from "../components/modals/Modal";
 import Header from "../structure/header/Header";
-import Body from "../structure/body/Body";
+import Board from "../components/board/Board";
 
 function Home() {
     const [modalInfo, setModalInfo] = useState({open: false, title: ''});
@@ -25,9 +25,21 @@ function Home() {
                       footer={LoginComp.footer}/>
     }
 
+    function renderBody(num) {
+        const boards = [];
+        for (let i = 0; i < num; i++) {
+            boards.push(<Board key={`body_board_${i}`}/>)
+        }
+        return boards
+    }
+
     return <>
         <Header loginInfo={LoginComp} handleHistory={historyChange}/>
-        <Body/>
+        <div id={'HomeBody'}>
+            <div className={'home-body-wrap'}>
+                {renderBody(7)}
+            </div>
+        </div>
         {modalInfo.open && renderModal()}
     </>
 }
