@@ -1,6 +1,6 @@
 import LoginComponent from "../components/Login/LoginComponent";
 import Modal from "../components/modals/Modal";
-import Header from "../structure/header/Header";
+import Header from "../components/header/Header";
 import Board from "../components/board/Board";
 import {useDispatch, useSelector} from "react-redux";
 import {close_modal} from "../redux/reducer/modalState";

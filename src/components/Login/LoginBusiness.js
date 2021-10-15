@@ -1,4 +1,4 @@
-import {autoLoginRegister, loginRegister} from "../server/post";
+import {autoLoginRegister, loginRegister} from "../../lib/server/post";
 import {login_user, logout_user} from "../../redux/reducer/userInfo";
 import {state_login, state_logout} from "../../redux/reducer/loginState";
 

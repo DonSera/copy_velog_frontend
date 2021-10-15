@@ -5,7 +5,7 @@ import Notice from "./pages/Notice";
 import TagList from "./pages/TagList";
 import MySetting from "./pages/MySetting";
 import {useEffect} from "react";
-import {autoLogin} from "./lib/login/LoginBusiness";
+import {autoLogin} from "./components/Login/LoginBusiness";
 import {useDispatch, useSelector} from "react-redux";
 
 function App() {

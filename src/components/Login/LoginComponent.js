@@ -1,7 +1,7 @@
 import LoginHeader from "./LoginHeader";
 import LoginBody from "./LoginBody";
 import LoginFooter from "./LoginFooter";
-import {clickLogin} from "../../lib/login/LoginBusiness";
+import {clickLogin} from "./LoginBusiness";
 import {useDispatch} from "react-redux";
 import {useRef, useState} from "react";
 import {handleFocus} from "../../lib/inputFocus";

@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import Modal from "../components/modals/Modal";
 import SettingUserInfo from "../components/SettingUserInfo/SettingUserInfo";
-import Header from "../structure/header/Header";
+import Header from "../components/header/Header";
 import {open_modal, close_modal} from "../redux/reducer/modalState";
 
 function MySetting() {

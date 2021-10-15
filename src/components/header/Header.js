@@ -1,10 +1,10 @@
 import styles from './Header.module.css'
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import LoginButton from "../../components/buttons/LoginButton";
-import Menu from "../../components/menu/Menu";
+import LoginButton from "../buttons/LoginButton";
+import Menu from "../menu/Menu";
 import {useHistory} from "react-router-dom";
-import {clickLogout} from "../../lib/login/LoginBusiness";
+import {clickLogout} from "../Login/LoginBusiness";
 import {open_modal} from "../../redux/reducer/modalState";
 
 function Header() {
