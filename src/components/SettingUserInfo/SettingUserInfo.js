@@ -2,7 +2,7 @@ import {useRef, useState} from "react";
 import LoginButton from "../buttons/LoginButton";
 import {userNameRegister} from "../../lib/server/post";
 import {useDispatch} from "react-redux";
-import {changeName} from "../../redux/userInfo";
+import {changeName} from "../../redux/reducer/userInfo";
 import {handleFocus} from "../../lib/inputFocus";
 
 function SettingUserInfo(stateId, stateEmail, stateName, closeModal) {
