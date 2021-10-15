@@ -3,11 +3,17 @@ import {useState} from "react";
 import {useSelector} from "react-redux";
 import LoginButton from "../../components/buttons/LoginButton";
 import Menu from "../../components/menu/Menu";
+import {useHistory} from "react-router-dom";
 
-function Header({loginInfo, handleHistory}) {
+function Header({loginInfo}) {
+    const history = useHistory();
     const userInfo = useSelector(state => state.userInfo);
     const [openMenu, setOpenMenu] = useState(false);
     const [openMyPageMenu, setOpenMyPageMenu] = useState(false);
+
+    function handleHistory(loc){
+        history.push(`/${loc}`);
+    }
 
     function handleMenu() {
         setOpenMenu(!openMenu);
