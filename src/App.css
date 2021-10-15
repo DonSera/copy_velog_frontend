@@ -1,5 +1,7 @@
 :root {
-    --board-width: calc(314px + 15px * 2);
+    --board-width: 314px;
+    --borad-margin: 16px;
+    --borad-total-width: calc(var(--board-width) + var(--borad-margin) * 2);
 }
 
 .App {
@@ -11,33 +13,33 @@ button:hover {
 
 #header {
     margin: auto;
-    width: calc(var(--board-width) * 5);
+    width: calc(var(--borad-total-width) * 5);
     height: 109px;
 }
 
 #body {
     margin: 0 auto;
     display: flex;
-    width: calc(var(--board-width) * 5);
+    width: calc(var(--borad-total-width) * 5);
 }
 
 @media (max-width: 1919px) {
     #header {
-        width: calc(var(--board-width) * 4);
+        width: calc(var(--borad-total-width) * 4);
     }
 
     #body {
-        width: calc(var(--board-width) * 4);
+        width: calc(var(--borad-total-width) * 4);
     }
 }
 
 @media (max-width: 1440px) {
     #header {
-        width: calc(var(--board-width) * 3);
+        width: calc(var(--borad-total-width) * 3);
     }
 
     #body {
-        width: calc(var(--board-width) * 3);
+        width: calc(var(--borad-total-width) * 3);
     }
 }
 
