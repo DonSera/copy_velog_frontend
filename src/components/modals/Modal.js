@@ -1,20 +1,39 @@
 import styles from './Modal.module.css'
-import {useEffect} from "react";
+import {useEffect, useRef} from "react";
 
 function Modal({header, body, footer, closeModal}) {
+    const modalRef = useRef(null);
+
     useEffect(() => {
         document.onkeydown = function (event) {
             if (event.key === 'Escape') {
                 closeModal();
             }
         }
+        // 해당 파일이 열려 있을 때만 listener를 실행한다.
+        window.addEventListener('click', handleRef);
+        return () => {
+            window.removeEventListener('click', handleRef);
+        }
     })
-    return <>
+
+    function close() {
+        closeModal();
+        modalRef.current = null;
+    }
+
+    function handleRef(e) {
+        if (!modalRef.current?.contains(e.target)) {
+            close();
+        }
+    }
+
+    return <div id={'modal'}>
         <div className={styles['modal-background']}/>
-        <div className={styles['modal-wrap']}>
+        <div className={styles['modal-wrap']} ref={modalRef}>
             <section className={styles['modal-header']}>
                 <button type="button"
-                        onClick={() => closeModal()}
+                        onClick={close}
                         className={styles['top-close']}
                         data-dismiss="modal"
                         aria-label="Close">
@@ -29,7 +48,7 @@ function Modal({header, body, footer, closeModal}) {
                 {footer}
             </section>
         </div>
-    </>
+    </div>
 }
 
 export default Modal;
