@@ -60,8 +60,8 @@ function LoginComponent(title, setModalInfo) {
 
     return {
         buttonFunction: {
-            logged: logoutClick,
-            notLogged: openLoginModal,
+            logout: logoutClick,
+            openModal: openLoginModal,
         },
         header: <LoginHeader title={title}/>,
         body: <LoginBody email={emailObj}
