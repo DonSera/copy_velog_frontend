@@ -1,6 +1,6 @@
 import {autoLoginRegister, loginRegister} from "../server/post";
-import {userLogin, userLogout} from "../../redux/userInfo";
-import {stateLogin, stateLogout} from "../../redux/loginState";
+import {userLogin, userLogout} from "../../redux/reducer/userInfo";
+import {stateLogin, stateLogout} from "../../redux/reducer/loginState";
 
 export async function autoLogin(dispatch) {
     try {
