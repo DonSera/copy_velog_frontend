@@ -1,22 +1,24 @@
 import {useRef, useState} from "react";
 import LoginButton from "../buttons/LoginButton";
 import {userNameRegister} from "../../lib/server/post";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {changeName} from "../../redux/reducer/userInfo";
 import {handleFocus} from "../../lib/inputFocus";
+import {closeLogin} from "../../redux/reducer/modalState";
 
-function SettingUserInfo(stateId, stateEmail, stateName, closeModal) {
+function SettingUserInfo() {
     const dispatch = useDispatch();
+    const userInfo = useSelector(state => state.userInfo);
     const [pw, setPW] = useState('');
-    const [name, setName] = useState(stateName);
+    const [name, setName] = useState(userInfo.name);
     const inputRef = useRef(null);
 
     async function saveName() {
-        const message = await userNameRegister(stateId, stateEmail, pw, name);
+        const message = await userNameRegister(userInfo.id, userInfo.email, pw, name);
         console.log(message.message);
         if (message.status) {
             dispatch(changeName({name: name}));
-            closeModal();
+            dispatch(closeLogin());
         } else {
             setPW('')
             handleFocus(inputRef);
