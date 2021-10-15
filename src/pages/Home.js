@@ -35,7 +35,7 @@ function Home() {
 
     return <>
         <Header loginInfo={LoginComp} handleHistory={historyChange}/>
-        <div id={'HomeBody'}>
+        <div id={'homeBody'}>
             <div className={'home-body-wrap'}>
                 {renderBody(7)}
             </div>
