@@ -1,0 +1,26 @@
+.menu {
+    margin-top: 0.5rem;
+    top: 100%;
+    right: 0;
+    width: max-content;
+    position: absolute;
+    z-index: 50;
+
+    background: white;
+    border: 1px solid lightgrey;
+    box-shadow: lightgrey 0 0 8px 0;
+}
+
+.menu > button {
+    display: block;
+    font-size: 1rem;
+    border: transparent;
+    background-color: transparent;
+    font-weight: bold;
+
+    padding: 0.5rem 1rem;
+}
+
+.menu > button:hover {
+    color: rgb(200, 200, 200);
+}

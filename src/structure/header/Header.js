@@ -2,6 +2,7 @@ import styles from './Header.module.css'
 import {useEffect, useRef, useState} from "react";
 import {useSelector} from "react-redux";
 import LoginButton from "../../components/buttons/LoginButton";
+import Menu from "../../components/menu/Menu";
 
 function Header({loginInfo, handleHistory}) {
     const userInfo = useSelector(state => state.userInfo);
@@ -46,15 +47,12 @@ function Header({loginInfo, handleHistory}) {
 
     function renderLoginButton() {
         if (userInfo.email) {
-            return <>
-                {userInfo.email}
-                {userInfo.name}
-                <button className={styles['example-button']}
-                        type={"button"}
-                        onClick={() => handleMenu('my page')}>
-                    마이페이지
-                </button>
-            </>
+            return <button className={styles['button-right']}
+                           type={"button"}
+                           onClick={() => handleMenu('my page')}>
+                마이페이지
+                {openMyPageMenu && myPageMenu()}
+            </button>
         } else {
             return <>
                 <LoginButton text={'Log in'} clickLogin={loginInfo.buttonFunction.notLogged}/>
@@ -64,75 +62,69 @@ function Header({loginInfo, handleHistory}) {
     }
 
     function menu() {
-        return <span className={styles['menu-board']} ref={menuRef}>
-                    <button type={"button"}
-                            onClick={() => handleHistory('notice')}>
-                        공지사항
-                    </button>
-                    <button type={"button"}
-                            onClick={() => handleHistory('tag_list')}>
-                        태그 목록
-                    </button>
-                    <button>서비스 정책</button>
-                    <button>Slack</button>
-                </span>
+        function gotoNotice() {
+            return handleHistory('notice');
+        }
+
+        function gotoTag() {
+            return handleHistory('tag_list')
+        }
+
+        const menuConfig = [
+            ['공지사항', gotoNotice],
+            ['태그목록', gotoTag],
+            ['서비스 정책'],
+            ['Slack']
+        ];
+        return <div ref={menuRef}>
+            <Menu config={menuConfig}/>
+        </div>;
     }
 
     function myPageMenu() {
-        return <span className={styles['menu-board']} ref={menuRef}>
-                    <button>내 벨로그</button>
-                    <button>임시 글</button>
-                    <button>읽기 목록</button>
-                    <button type={"button"}
-                            onClick={() => handleHistory(`my_setting`)}>
-                        설정
-                    </button>
-                    <button onClick={logoutClick}>로그아웃</button>
-                </span>
+        function gotoSetting() {
+            return handleHistory(`my_setting`);
+        }
+
+        const menuConfig = [
+            ['내 벨로그'],
+            ['임시 글'],
+            ['읽기 목록'],
+            ['설정', gotoSetting],
+            ['로그아웃', logoutClick]
+        ];
+        return <span ref={menuRef}>
+            <Menu config={menuConfig}/>
+        </span>;
     }
 
-    return <>
-        <div id={'header'}>
-            <section className={styles['header-top']}>
-                <span className={styles['logo-box']}>
-                    <button className={styles['logo-button']}
-                            type={"button"}
-                            onClick={() => handleHistory('/')}>
-                        velog
-                    </button>
-                </span>
-                <span className={styles['login-box']}>
-                    {renderLoginButton()}
-                </span>
+    return <div id={'header'}>
+        <section className={styles['header-top']}>
+            <section className={styles['left']}>
+                <button className={styles['logo']}
+                        onClick={() => handleHistory('')}>
+                    velog
+                </button>
             </section>
-            <section className={styles['my-page-menu']}>
-                {openMyPageMenu && myPageMenu()}
+            <section className={styles['right']}>
+                {userInfo.name}
+                {renderLoginButton()}
             </section>
-            <section className={styles['header-bottom']}>
-                <span className={styles['section']}>
-                    <button className={styles['example-button']} type={"button"}>
-                        트렌딩
-                    </button>
-                    <button className={styles['example-button']} type={"button"}>
-                        최신
-                    </button>
-                    <button className={styles['example-button']} type={"button"}>
-                        일자
-                    </button>
-                </span>
-                <span className={styles['menu']}>
-                    <button className={styles['example-button']}
-                            type={"button"}
-                            onClick={handleMenu}>
-                        메뉴
-                    </button>
-                </span>
+        </section>
+        <section className={styles['header-bottom']}>
+            <section className={styles['left']}>
+                <button type={"button"}>트렌딩</button>
+                <button type={"button"}>최신</button>
+                <button type={"button"}>일자</button>
             </section>
-            <section className={styles['header-menu']}>
-                {openMenu && menu()}
+            <section className={styles['right']}>
+                <button onClick={handleMenu}>
+                    메뉴
+                    {openMenu && menu()}
+                </button>
             </section>
-        </div>
-    </>
+        </section>
+    </div>
 }
 
 export default Header;
