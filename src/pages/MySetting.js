@@ -28,10 +28,12 @@ function MySetting() {
 
     return <section id={'mySetting'}>
         <Header/>
-        <div>Email : {userInfo.email}</div>
-        <div>NickName : {userInfo.name}</div>
-        <button onClick={openModal}>설정 변경</button>
-        {modalInfo.open && renderModal()}
+        <div id={'settingBody'} className={'Body'}>
+            <div>Email : {userInfo.email}</div>
+            <div>NickName : {userInfo.name}</div>
+            <button onClick={openModal}>설정 변경</button>
+            {modalInfo.open && renderModal()}
+        </div>
     </section>
 }
 

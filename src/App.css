@@ -2,9 +2,14 @@
     --board-width: 314px;
     --borad-margin: 16px;
     --borad-total-width: calc(var(--board-width) + var(--borad-margin) * 2);
+    --body-margin-top: 110px;
 }
 
 .App {
+}
+
+.Body {
+    padding-top: var(--body-margin-top);
 }
 
 button:hover {
@@ -23,7 +28,6 @@ button:hover {
 }
 
 #homeBody {
-    padding-top: 110px;
     margin: 0 auto;
     display: flex;
     width: calc(var(--borad-total-width) * 5);

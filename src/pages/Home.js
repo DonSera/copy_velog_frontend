@@ -31,9 +31,9 @@ function Home() {
 
     return <>
         <Header/>
-        <div id={'homeBody'}>
+        <div id={'homeBody'} className={'Body'}>
             <div className={'home-body-wrap'}>
-                {renderBody(7)}
+                {renderBody(30)}
             </div>
         </div>
         {modalInfo.open && renderModal()}
