@@ -6,7 +6,7 @@ export async function autoLogin(dispatch) {
     try {
         const storageId = JSON.parse(localStorage.getItem('id'));
         if (storageId) {
-            if (storageId.timestamp < nowTime()) {
+            if (storageId.timestamp < Date.now()) {
                 // 지정 시간 넘어가면 로그아웃
                 clickLogout(dispatch);
             } else {
@@ -50,17 +50,11 @@ export function clickLogout(dispatch) {
 
 function setStorage(key, value, times) {
     // localStorage 추가하기
-    const object = {value: value, timestamp: nowTime() + (times * 24 * 60 * 60 * 1000)};
+    const object = {value: value, timestamp: Date.now() + (times * 24 * 60 * 60 * 1000)};
     localStorage.setItem(key, JSON.stringify(object));
 }
 
 function deleteStorage(key) {
     //localStorage 삭제하기
     localStorage.removeItem(key);
-}
-
-function nowTime() {
-    // 현재 시간 구하기
-    const date = new Date();
-    return date.getTime()
 }
