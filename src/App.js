@@ -8,7 +8,7 @@ import {useEffect} from "react";
 import {autoLogin} from "./components/Login/LoginBusiness";
 import {useDispatch, useSelector} from "react-redux";
 import NotFound from "./pages/NotFound";
-import Post from "./pages/Post";
+import VelogPost from "./pages/VelogPost";
 import MyPage from "./pages/MyPage";
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
                     <Route path={`/tag_list`} component={TagList}/>
                     <Route path={`/my_setting`} component={MySetting}/>
                     <Route exact path={`/:email`} component={MyPage}/>
-                    <Route path={`/:email/:title`} component={Post}/>
+                    <Route path={`/:email/:title`} component={VelogPost}/>
                     <Route path={'*'} component={NotFound}/>
                 </Switch>
             </Router>

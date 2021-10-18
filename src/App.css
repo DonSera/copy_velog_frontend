@@ -12,6 +12,11 @@
     padding-top: var(--body-margin-top);
 }
 
+.Post{
+    width: 768px;
+    margin: 0 auto;
+}
+
 button:hover {
     cursor: pointer;
 }
@@ -63,6 +68,10 @@ button:hover {
     }
 
     #homeBody {
+        width: 100%;
+    }
+
+    .Post{
         width: 100%;
     }
 }
