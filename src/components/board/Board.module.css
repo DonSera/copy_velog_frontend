@@ -14,6 +14,11 @@
 .image {
     height: 167px;
     border-bottom: 1px solid lightgrey;
+    overflow: hidden;
+}
+
+.image > img {
+    width: 100%;
 }
 
 @media (max-width: 1056px) {
@@ -40,11 +45,6 @@
 @media (max-width: 752px) {
     .board {
         width: calc(100% - 2rem);
-    }
-
-    .image {
-        background-size: cover;
-        background-image: url("https://media.vlpt.us/images/te-ing/post/771c02e6-bbe9-4925-9679-ecc47e322bc2/%EA%B2%80%EC%83%89%EC%96%B4%EB%A5%BC%EC%9E%85%EB%A0%A5%ED%95%98%EC%84%B8%EC%9A%94.jpg?w=640");
     }
 }
 
