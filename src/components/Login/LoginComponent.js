@@ -32,23 +32,36 @@ function LoginComponent(title) {
 
 
     function loginClick(emailInfo = email, passwordInfo = password) {
-        // 로그인 또는 회원가입
-        let type = 'login';
-        if (title === 'Sign up') {
-            type = 'signup';
-        }
-
-        if (type === 'signup') {
-            if (checkPW !== password) {
-                alert("비밀번호가 일치하지 않습니다.");
-                setCheckPW('');
-                setPassword('');
-                handleFocus(pwInputRef);
-            } else {
-                loginFunc(type, emailInfo, passwordInfo).then();
-            }
+        if (emailInfo === '') {
+            alert("이메일을 입력해 주십시오.");
+            handleFocus(emailInputRef);
+        } else if (passwordInfo === '') {
+            alert("비밀번호를 입력해 주십시오.");
+            handleFocus(pwInputRef);
         } else {
-            loginFunc(type, emailInfo, passwordInfo).then();
+            if (emailInfo.indexOf('@') === -1) {
+                alert("이메일 형식이 올바르지 않습니다.");
+                handleFocus(emailInputRef);
+            } else {
+                // 로그인 또는 회원가입
+                let type = 'login';
+                if (title === 'Sign up') {
+                    type = 'signup';
+                }
+
+                if (type === 'signup') {
+                    if (checkPW !== password) {
+                        alert("비밀번호가 일치하지 않습니다.");
+                        setCheckPW('');
+                        setPassword('');
+                        handleFocus(pwInputRef);
+                    } else {
+                        loginFunc(type, emailInfo, passwordInfo).then();
+                    }
+                } else {
+                    loginFunc(type, emailInfo, passwordInfo).then();
+                }
+            }
         }
     }
 
