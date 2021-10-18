@@ -7,6 +7,7 @@ import MySetting from "./pages/MySetting";
 import {useEffect} from "react";
 import {autoLogin} from "./components/Login/LoginBusiness";
 import {useDispatch, useSelector} from "react-redux";
+import NotFound from "./pages/NotFound";
 
 function App() {
     const dispatch = useDispatch();
@@ -25,6 +26,7 @@ function App() {
                     <Route path={`/notice`} component={Notice}/>
                     <Route path={`/tag_list`} component={TagList}/>
                     <Route path={`/my_setting`} component={MySetting}/>
+                    <Route path={'*'} component={NotFound}/>
                 </Switch>
             </Router>
         </div>
