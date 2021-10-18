@@ -14,7 +14,7 @@ function App() {
     useEffect(() => {
         // localStorage의 id 값으로 자동 로그인
         if (!loginState.bool) {
-            autoLogin(dispatch).then();
+            autoLogin(dispatch);
         }
     }, [dispatch, loginState.bool]);
     return (
