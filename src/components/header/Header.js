@@ -15,8 +15,6 @@ function Header() {
     const [openMyPageMenu, setOpenMyPageMenu] = useState(false);
 
     const headerRef = useRef();
-    const preDir = useRef("down");
-    const preScrollY = useRef(0);
     const lastScrollTop = useRef(0);
 
     useEffect(() => {
@@ -28,29 +26,14 @@ function Header() {
 
     function updateScroll() {
         const currentScrollY = window.scrollY;
-        const height = Number(headerRef.current.style.height.split("px")[0]);
-        const marginTop = Number(headerRef.current.style.marginTop.split("px")[0]);
+        // const height = Number(headerRef.current.style.height.split("px")[0]);
+        // const marginTop = Number(headerRef.current.style.marginTop.split("px")[0]);
+        const dir = currentScrollY - lastScrollTop.current > 0 ? "down" : "up"
 
-        if (currentScrollY > lastScrollTop.current) {
-            console.log(marginTop + " down");
-            if (marginTop > -height) {
-                headerRef.current.style.marginTop = `-${currentScrollY - preScrollY.current}px`;
-            }
-            if (preDir.current === "up") {
-                console.log("change dir")
-                preScrollY.current = currentScrollY;
-            }
-            preDir.current = "down";
+        if (dir === "down") {
+            headerRef.current.style.marginTop = '-120px'
         } else {
-            console.log(marginTop + " up");
-            if (marginTop < 0) {
-                headerRef.current.style.marginTop = `-${height - (preScrollY.current - currentScrollY)}px`;
-            }
-            if (preDir.current === "down") {
-                console.log("change dir")
-                preScrollY.current = currentScrollY;
-            }
-            preDir.current = "up";
+            headerRef.current.style.marginTop = '0px'
         }
 
         lastScrollTop.current = currentScrollY;
