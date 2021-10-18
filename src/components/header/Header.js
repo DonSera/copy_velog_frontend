@@ -73,8 +73,12 @@ function Header() {
         handleMyPageMenu();
     }
 
-    function openClick(text) {
-        dispatch(open_modal({title: text}));
+    function loginOpenClick() {
+        dispatch(open_modal({title: "Log in"}));
+    }
+
+    function SignupOpenClick() {
+        dispatch(open_modal({title: "Sign up"}));
     }
 
     function menu() {
@@ -134,8 +138,8 @@ function Header() {
                             {openMyPageMenu && myPageMenu()}
                         </div>
                         : <section>
-                            <LoginButton text={'Log in'} clickLogin={openClick}/>
-                            <LoginButton text={'Sign up'} clickLogin={openClick}/>
+                            <LoginButton text={'Log in'} clickLogin={loginOpenClick}/>
+                            <LoginButton text={'Sign up'} clickLogin={SignupOpenClick}/>
                         </section>
                     }
                 </section>
