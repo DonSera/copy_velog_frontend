@@ -14,25 +14,46 @@ function LoginComponent(title) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [checkPW, setCheckPW] = useState('')
     const emailInputRef = useRef(null);
     const pwInputRef = useRef(null);
 
     const emailObj = {value: email, setValue: setEmail, ref: emailInputRef};
-    const pwObj = {value: password, setValue: setPassword, ref: pwInputRef};
+    const pwObj = {
+        value: password, setValue: setPassword, ref: pwInputRef,
+        checkValue: checkPW, setCheckValue: setCheckPW
+    };
+
 
     function closeLoginModal() {
         // 모달 내리기
         dispatch(close_modal());
     }
 
-    async function loginClick(emailInfo = email, passwordInfo = password) {
+
+    function loginClick(emailInfo = email, passwordInfo = password) {
         // 로그인 또는 회원가입
         let type = 'login';
         if (title === 'Sign up') {
             type = 'signup';
         }
 
-        const message = await clickLogin(type, emailInfo, passwordInfo, dispatch);
+        if (type === 'signup') {
+            if (checkPW !== password) {
+                alert("비밀번호가 일치하지 않습니다.");
+                setCheckPW('');
+                setPassword('');
+                handleFocus(pwInputRef);
+            } else {
+                loginFunc(type, emailInfo, passwordInfo).then();
+            }
+        } else {
+            loginFunc(type, emailInfo, passwordInfo).then();
+        }
+    }
+
+    async function loginFunc(type, email, pw) {
+        const message = await clickLogin(type, email, pw, dispatch);
         if (message.includes('success')) {
             closeLoginModal();
             setEmail('');
@@ -46,6 +67,7 @@ function LoginComponent(title) {
             alert(message);
         }
         setPassword('');
+        setCheckPW('');
     }
 
 
@@ -53,7 +75,8 @@ function LoginComponent(title) {
         header: <LoginHeader title={title}/>,
         body: <LoginBody email={emailObj}
                          password={pwObj}
-                         enterKey={loginClick}/>,
+                         enterKey={loginClick}
+                         type={title}/>,
         footer: <LoginFooter title={title} clickButton={loginClick}/>
     }
 }
