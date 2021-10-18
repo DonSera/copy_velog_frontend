@@ -28,8 +28,8 @@ function App() {
                     <Route path={`/notice`} component={Notice}/>
                     <Route path={`/tag_list`} component={TagList}/>
                     <Route path={`/my_setting`} component={MySetting}/>
-                    <Route exact path={`/:email`} component={MyPage}/>
-                    <Route path={`/:email/:title`} component={VelogPost}/>
+                    <Route exact path={`/:name`} component={MyPage}/>
+                    <Route path={`/:name/:title`} component={VelogPost}/>
                     <Route path={'*'} component={NotFound}/>
                 </Switch>
             </Router>

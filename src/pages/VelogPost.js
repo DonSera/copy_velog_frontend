@@ -7,24 +7,24 @@ import Header from "../components/header/Header";
 
 function VelogPost() {
     const history = useHistory();
-    const {email, title} = useParams();
-    const [MKObj, setMKObj] = useState({title: [], content: [], detail: []});
+    const {name, title} = useParams();
+    const [MKObj, setMKObj] = useState({title: [], subTitle: [], content: []});
 
     useEffect(() => {
         BoardInfo.board.forEach(info => {
-            if (info.user === email && info.title === title) {
+            if (info.writer.name === name && info.title === title) {
                 BoardInfoDetail.board.forEach(DetailInfo => {
-                    if (DetailInfo.boardId === info.boardId) {
+                    if (DetailInfo.id === info.id) {
                         setMKObj({
                             title: DetailInfo.title.split("\n"),
-                            content: DetailInfo.content.split("\n"),
-                            detail: DetailInfo.detail.split("\n")
+                            subTitle: DetailInfo.subTitle.split("\n"),
+                            content: DetailInfo.content.split("\n")
                         });
                     }
                 })
             }
         })
-    }, [email, title])
+    }, [name, title])
 
     function handleHistory(loc) {
         history.push(`/${loc}`)
@@ -34,15 +34,15 @@ function VelogPost() {
         <Header/>
         <div className={'Post Body'}>
             <div>Post</div>
-            <div>{email}</div>
+            <div>{name}</div>
             <div>{title}</div>
             <button onClick={() => handleHistory('')}>go home</button>
             {MKObj.title.map((text, index) => <ReactMarkdown
                 key={`markdown_title_${index}`}>{text}</ReactMarkdown>)}
+            {MKObj.subTitle.map((text, index) => <ReactMarkdown
+                key={`markdown_subTitle_${index}`}>{text}</ReactMarkdown>)}
             {MKObj.content.map((text, index) => <ReactMarkdown
                 key={`markdown_content_${index}`}>{text}</ReactMarkdown>)}
-            {MKObj.detail.map((text, index) => <ReactMarkdown
-                key={`markdown_detail_${index}`}>{text}</ReactMarkdown>)}
         </div>
     </>
 }

@@ -2,7 +2,7 @@ import {useHistory, useParams} from "react-router-dom";
 
 function MyPage() {
     const history = useHistory();
-    const {email} = useParams();
+    const {name} = useParams();
 
     function handleHistory(loc) {
         history.push(`/${loc}`)
@@ -10,7 +10,7 @@ function MyPage() {
 
     return <>
         <div>MyPage</div>
-        <div>{email}</div>
+        <div>{name}</div>
         <button onClick={() => handleHistory('')}>go home</button>
     </>
 }
