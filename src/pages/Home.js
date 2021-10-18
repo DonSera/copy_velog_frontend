@@ -4,6 +4,7 @@ import Header from "../components/header/Header";
 import Board from "../components/board/Board";
 import {useDispatch, useSelector} from "react-redux";
 import {close_modal} from "../redux/reducer/modalState";
+import BoardInfo from '../info/testInfo.json';
 
 function Home() {
     const modalInfo = useSelector(state => state.modalState.modalInfo);
@@ -16,24 +17,18 @@ function Home() {
 
     function renderModal() {
         return <Modal closeModal={closeModal}
-                      header={LoginComp.header}
-                      body={LoginComp.body}
-                      footer={LoginComp.footer}/>
+                      {...LoginComp}/>
     }
 
-    function renderBody(num) {
-        const boards = [];
-        for (let i = 0; i < num; i++) {
-            boards.push(<Board key={`body_board_${i}`}/>)
-        }
-        return boards;
+    function renderBody() {
+        return BoardInfo.board.map((info, index) => <Board key={`body_board_${index}`} info={info}/>);
     }
 
     return <>
         <Header/>
         <div id={'homeBody'} className={'Body'}>
             <div className={'home-body-wrap'}>
-                {renderBody(30)}
+                {renderBody()}
             </div>
         </div>
         {modalInfo.open && renderModal()}
