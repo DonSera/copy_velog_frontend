@@ -3,13 +3,13 @@ import {useHistory} from "react-router-dom";
 function TagList() {
     const history = useHistory();
 
-    function historyChange(loc) {
+    function handleHistory(loc) {
         history.push(`/${loc}`)
     }
 
     return <>
         <div>TagList</div>
-        <button onClick={() => historyChange('')}>go home</button>
+        <button onClick={() => handleHistory('')}>go home</button>
     </>
 }
 
