@@ -1,19 +1,21 @@
 import styles from './LoginButton.module.css'
-import {useRef} from "react";
 
-function LoginButton({clickLogin, text}) {
-    const btnRef = useRef();
+function LoginButton({text, clickLogin}) {
+    let clickDisabled = false;
 
     async function onClick() {
-        btnRef.current.disabled = true;
-        await clickLogin();
-        btnRef.current.disabled = false;
+        if (clickDisabled) {
+            return false;
+        } else {
+            clickDisabled = true;
+            clickLogin();
+            clickDisabled = false;
+        }
     }
 
     return <button type={"button"}
                    className={styles[`login-button`]}
-                   onClick={onClick}
-                   ref={btnRef}>
+                   onClick={onClick}>
         {text}
     </button>
 }
