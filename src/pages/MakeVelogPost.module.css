@@ -1,0 +1,29 @@
+.make-post {
+    padding-top: 110px;
+}
+
+.post-input {
+    float: left;
+    padding: 0 10px 0 20px;
+    width: calc(50% - 50px);
+    height: 1050px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.post-output {
+    float: right;
+    padding: 0 20px 0 10px;
+    width: calc(50% - 50px);
+    height: 90%;
+}
+
+.post-content {
+    flex: 1;
+}
+
+.content-textarea {
+    width: 100%;
+    height: calc(100% - 2rem);
+}

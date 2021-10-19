@@ -1,9 +1,11 @@
+import styles from './MakeVelogPost.module.css'
 import Header from "../components/header/Header";
 import {useEffect, useState} from "react";
 import {makePostRegister} from "../lib/server/post";
 import {useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import ReactMarkdown from 'react-markdown'
+import LoginButton from "../components/buttons/LoginButton";
 
 function MakeVelogPost() {
     const [title, setTitle] = useState('');
@@ -52,19 +54,28 @@ function MakeVelogPost() {
         })
     }
 
-    return <section className={'make-post'}>
+    return <section>
         <Header/>
-        <div className={'Body'}>
-            <section className={'post-input'}>
-                <div>타이틀</div>
-                <input value={title} onChange={e => setTitle(e.target.value)}/>
-                <div>서브 타이틀</div>
-                <input value={subTitle} onChange={e => setSubTitle(e.target.value)}/>
-                <div>컨텐트</div>
-                <textarea value={content} onChange={e => setContent(e.target.value)}/>
-                <button type={"button"} onClick={clickSavePost}>저장하기</button>
+        <div className={'Body ' + styles['make-post']}>
+            <section className={styles['post-input']}>
+                <div className={styles['post-title']}>
+                    <div>타이틀</div>
+                    <input value={title} onChange={e => setTitle(e.target.value)}/>
+                </div>
+                <div className={styles['post-subTitle']}>
+                    <div>서브 타이틀</div>
+                    <input value={subTitle} onChange={e => setSubTitle(e.target.value)}/>
+                </div>
+                <div className={styles['post-content']}>
+                    <div>컨텐트</div>
+                    <textarea value={content} onChange={e => setContent(e.target.value)}
+                              className={styles['content-textarea']}/>
+                </div>
+                <div className={styles['save-button']}>
+                    <LoginButton text={'저장하기'} clickLogin={clickSavePost}/>
+                </div>
             </section>
-            <div className={'post-output'}>
+            <div className={styles['post-output']}>
                 <ReactMarkdown>{MKObj.title}</ReactMarkdown>
                 <ReactMarkdown>{MKObj.subTitle}</ReactMarkdown>
                 {MKObj.contents.map((content, index) => <ReactMarkdown
