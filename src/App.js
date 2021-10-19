@@ -1,15 +1,17 @@
 import './App.css';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {useEffect} from "react";
+import {autoLogin} from "./components/Login/LoginBusiness";
+import {useDispatch, useSelector} from "react-redux";
+
 import Home from "./pages/Home";
 import Notice from "./pages/Notice";
 import TagList from "./pages/TagList";
 import MySetting from "./pages/MySetting";
-import {useEffect} from "react";
-import {autoLogin} from "./components/Login/LoginBusiness";
-import {useDispatch, useSelector} from "react-redux";
 import NotFound from "./pages/NotFound";
 import VelogPost from "./pages/VelogPost";
 import MyPage from "./pages/MyPage";
+import MakeVelogPost from "./pages/MakeVelogPost";
 
 function App() {
     const dispatch = useDispatch();
@@ -28,6 +30,7 @@ function App() {
                     <Route path={`/notice`} component={Notice}/>
                     <Route path={`/tag_list`} component={TagList}/>
                     <Route path={`/my_setting`} component={MySetting}/>
+                    <Route path={`/make_post`} component={MakeVelogPost}/>
                     <Route exact path={`/:name`} component={MyPage}/>
                     <Route path={`/:name/:title`} component={VelogPost}/>
                     <Route path={'*'} component={NotFound}/>

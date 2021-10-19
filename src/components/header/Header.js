@@ -1,11 +1,11 @@
 import styles from './Header.module.css'
 import {useEffect, useRef, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import LoginButton from "../buttons/LoginButton";
-import Menu from "../menu/Menu";
 import {useHistory} from "react-router-dom";
 import {clickLogout} from "../Login/LoginBusiness";
 import {open_modal} from "../../redux/reducer/modalState";
+import LoginButton from "../buttons/LoginButton";
+import Menu from "../menu/Menu";
 
 function Header() {
     const history = useHistory();
@@ -26,8 +26,6 @@ function Header() {
 
     function updateScroll() {
         const currentScrollY = window.scrollY;
-        // const height = Number(headerRef.current.style.height.split("px")[0]);
-        // const marginTop = Number(headerRef.current.style.marginTop.split("px")[0]);
         const dir = currentScrollY - lastScrollTop.current > 0 ? "down" : "up"
 
         if (dir === "down") {
@@ -100,6 +98,10 @@ function Header() {
         return <Menu config={menuConfig} closeMenu={handleMyPageMenu}/>;
     }
 
+    function makePostClick() {
+        return handleHistory('make_post');
+    }
+
     function renderHeader() {
         return <div id={'header'} ref={headerRef} style={{height: "110px"}}>
             <section className={styles['header-top']}>
@@ -111,6 +113,7 @@ function Header() {
                 </section>
                 <section className={styles['right']}>
                     {userInfo.name}
+                    <LoginButton text={'새 게시글 작성'} clickLogin={makePostClick}/>
                     {userInfo.email
                         ?
                         <div>
