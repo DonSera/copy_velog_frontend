@@ -7,10 +7,10 @@ import {getPostRegister} from "../lib/server/post";
 function VelogPost() {
     const history = useHistory();
     const {id} = useParams();
-    const [MKObj, setMKObj] = useState({titles: [], subTitles: [], contents: []});
+    const [MKObj, setMKObj] = useState({title: '', subTitle: '', contents: []});
 
     useEffect(() => {
-        if (MKObj.titles.length === 0) {
+        if (MKObj.title === '') {
             getPost();
         }
     })
@@ -23,8 +23,8 @@ function VelogPost() {
         const postInfo = await getPostRegister(id);
         if (postInfo.status) {
             setMKObj({
-                titles: postInfo.info.title.split("\n"),
-                subTitles: postInfo.info.subTitle.split("\n"),
+                title: `# ${postInfo.info.title}`,
+                subTitle: `## ${postInfo.info.subTitle}`,
                 contents: postInfo.info.content.split("\n")
             })
         }
@@ -37,10 +37,8 @@ function VelogPost() {
             <div>Post</div>
             <div>{id}</div>
             <button onClick={() => handleHistory('')}>go home</button>
-            {MKObj.titles.map((title, index) => <ReactMarkdown
-                key={`markdown_title_${index}`}>{title}</ReactMarkdown>)}
-            {MKObj.subTitles.map((subTitle, index) => <ReactMarkdown
-                key={`markdown_subTitle_${index}`}>{subTitle}</ReactMarkdown>)}
+            <ReactMarkdown>{MKObj.title}</ReactMarkdown>
+            <ReactMarkdown>{MKObj.subTitle}</ReactMarkdown>
             {MKObj.contents.map((content, index) => <ReactMarkdown
                 key={`markdown_content_${index}`}>{content}</ReactMarkdown>)}
         </div>
