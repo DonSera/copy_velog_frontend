@@ -23,3 +23,18 @@ export async function userNameRegister(id, email, password, newName) {
         name: newName
     });
 }
+
+export async function getPostRegister(postId) {
+    // backend에 저장되어 있는 게시글 정보 가져오기
+    // id가 ''인 경우 전부 가져온다.
+    return await post('getPost', {id: postId});
+}
+
+export async function makePostRegister(title, subTitle, content, userId) {
+    // backend와 연동하여 게시글 저장
+    const date = new Date();
+    return await post('makePost', {
+        title: title, subTitle: subTitle, content: content,
+        date: date.toLocaleString(), writerId: userId
+    })
+}

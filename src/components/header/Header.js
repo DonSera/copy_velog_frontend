@@ -113,10 +113,12 @@ function Header() {
                 </section>
                 <section className={styles['right']}>
                     {userInfo.name}
-                    <LoginButton text={'새 게시글 작성'} clickLogin={makePostClick}/>
                     {userInfo.email
                         ?
                         <div>
+                            <span>
+                                <LoginButton text={'새 게시글 작성'} clickLogin={makePostClick}/>
+                            </span>
                             <button type={"button"}
                                     onClick={handleMyPageMenu}>
                                 마이페이지

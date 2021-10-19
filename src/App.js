@@ -31,8 +31,8 @@ function App() {
                     <Route path={`/tag_list`} component={TagList}/>
                     <Route path={`/my_setting`} component={MySetting}/>
                     <Route path={`/make_post`} component={MakeVelogPost}/>
-                    <Route exact path={`/:name`} component={MyPage}/>
-                    <Route path={`/:name/:title`} component={VelogPost}/>
+                    <Route path={`/myPage/:name`} component={MyPage}/>
+                    <Route path={`/post/:id`} component={VelogPost}/>
                     <Route path={'*'} component={NotFound}/>
                 </Switch>
             </Router>
