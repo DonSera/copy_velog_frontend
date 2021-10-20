@@ -1,6 +1,6 @@
 import styles from './LoginButton.module.css'
 
-function LoginButton({text, clickLogin}) {
+function BlackButton({text, clickButton}) {
     let clickDisabled = false;
 
     async function onClick() {
@@ -8,7 +8,7 @@ function LoginButton({text, clickLogin}) {
             return false;
         } else {
             clickDisabled = true;
-            clickLogin();
+            clickButton();
             clickDisabled = false;
         }
     }
@@ -20,4 +20,4 @@ function LoginButton({text, clickLogin}) {
     </button>
 }
 
-export default LoginButton;
+export default BlackButton;

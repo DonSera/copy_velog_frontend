@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import {clickLogout} from "../Login/LoginBusiness";
 import {open_modal} from "../../redux/reducer/modalState";
-import LoginButton from "../buttons/LoginButton";
+import BlackButton from "../buttons/BlackButton";
 import Menu from "../menu/Menu";
 
 function Header() {
@@ -117,8 +117,7 @@ function Header() {
                         ?
                         <div>
                             <span>
-                                <LoginButton text={'새 게시글 작성'}
-                                             clickLogin={ClickMakePost}/>
+                                <BlackButton text={'새 게시글 작성'} clickButton={ClickMakePost}/>
                             </span>
                             <button type={"button"}
                                     onClick={handleMyPageBox}>
@@ -127,8 +126,8 @@ function Header() {
                             {openMyPageMenu && myPageBox()}
                         </div>
                         : <section>
-                            <LoginButton text={'Log in'} clickLogin={loginOpenClick}/>
-                            <LoginButton text={'Sign up'} clickLogin={SignupOpenClick}/>
+                            <BlackButton text={'Log in'} clickButton={loginOpenClick}/>
+                            <BlackButton text={'Sign up'} clickButton={SignupOpenClick}/>
                         </section>
                     }
                 </section>

@@ -1,7 +1,7 @@
-import LoginButton from "../buttons/LoginButton";
+import BlackButton from "../buttons/BlackButton";
 
 function LoginFooter({title, clickButton}) {
-    return <LoginButton text={title} clickLogin={clickButton}/>;
+    return <BlackButton text={title} clickButton={clickButton}/>;
 }
 
 export default LoginFooter;

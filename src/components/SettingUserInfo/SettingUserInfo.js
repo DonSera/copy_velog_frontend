@@ -1,5 +1,5 @@
 import {useRef, useState} from "react";
-import LoginButton from "../buttons/LoginButton";
+import BlackButton from "../buttons/BlackButton";
 import {userNameRegister} from "../../lib/server/post";
 import {useDispatch, useSelector} from "react-redux";
 import {change_name} from "../../redux/reducer/userInfo";
@@ -44,7 +44,7 @@ function SettingUserInfo() {
                        onKeyUp={e => e.keyCode === 13 && saveName()}/>
             </div>
         </>,
-        footer: <LoginButton text={'저장하기'} clickLogin={saveName}/>
+        footer: <BlackButton text={'저장하기'} clickButton={saveName}/>
     }
 }
 
