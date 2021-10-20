@@ -95,8 +95,13 @@ function Header() {
             return history.push(`/my_setting/${userInfo.name}`);
         }
 
+        function gotoMyPage() {
+            handleMyPageBox();
+            return history.push(`/my_page/${userInfo.name}`);
+        }
+
         const menuConfig = [
-            ['내 벨로그'],
+            ['내 벨로그', gotoMyPage],
             ['임시 글'],
             ['읽기 목록'],
             ['설정', gotoSetting],
