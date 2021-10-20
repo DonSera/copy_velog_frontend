@@ -24,8 +24,8 @@ function MakeVelogPost() {
     async function clickSavePost() {
         let convertTitle = title.trim();
         let convertSubTitle = subTitle.trim();
-        if (title === '' || subTitle === '') {
-            alert("Title과 SubTitle을 적어주세요")
+        if (convertTitle === '') {
+            alert("Title을 적어주세요");
         } else {
             const message = await makePostRegister(
                 convertTitle,
