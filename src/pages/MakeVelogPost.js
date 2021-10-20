@@ -1,16 +1,18 @@
 import styles from './MakeVelogPost.module.css'
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import ReactMarkdown from 'react-markdown'
 import {makePostRegister} from "../lib/server/post";
 import SquareRoundBtn from "../components/buttons/SquareRoundBtn";
+import {viewMarkDown} from "../lib/viewMarkDown";
 
 function MakeVelogPost() {
     const [title, setTitle] = useState('');
     const [subTitle, setSubTitle] = useState('');
     const [content, setContent] = useState('');
     const [MKObj, setMKObj] = useState({title: '', subTitle: '', contents: []});
+    const enterCheck = useRef(false);
 
     const userInfo = useSelector(state => state.userInfo);
     const history = useHistory();
@@ -66,7 +68,10 @@ function MakeVelogPost() {
             </div>
             <div className={styles['post-content']}>
                 <div>컨텐트</div>
-                <textarea value={content} onChange={e => setContent(e.target.value)}
+                <textarea value={content}
+                          onChange={e => {
+                              setContent(e.target.value);
+                          }}
                           className={styles['content-textarea']}/>
             </div>
             <div className={styles['save-button']}>
@@ -76,8 +81,9 @@ function MakeVelogPost() {
         <div className={styles['post-output']}>
             <ReactMarkdown>{MKObj.title}</ReactMarkdown>
             <ReactMarkdown>{MKObj.subTitle}</ReactMarkdown>
-            {MKObj.contents.map((content, index) => <ReactMarkdown
-                key={`markdown_content_${index}`}>{content}</ReactMarkdown>)}
+            {MKObj.contents.map((content, index) => {
+                return viewMarkDown(content, index, enterCheck);
+            })}
         </div>
     </div>
 }

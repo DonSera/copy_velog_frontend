@@ -1,11 +1,13 @@
 import {useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import ReactMarkdown from 'react-markdown'
 import {getPostRegister} from "../lib/server/post";
+import {viewMarkDown} from "../lib/viewMarkDown";
 
 function VelogPost() {
     const {id} = useParams();
     const [MKObj, setMKObj] = useState({title: '', subTitle: '', contents: []});
+    const enterCheck = useRef(false);
 
     useEffect(() => {
         if (MKObj.title === '') {
@@ -28,8 +30,9 @@ function VelogPost() {
     return <div className={'Post'}>
         <ReactMarkdown>{MKObj.title}</ReactMarkdown>
         <ReactMarkdown>{MKObj.subTitle}</ReactMarkdown>
-        {MKObj.contents.map((content, index) => <ReactMarkdown
-            key={`markdown_content_${index}`}>{content}</ReactMarkdown>)}
+        {MKObj.contents.map((content, index) => {
+            return viewMarkDown(content, index, enterCheck);
+        })}
     </div>
 }
 
