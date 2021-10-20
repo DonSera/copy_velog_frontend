@@ -2,7 +2,6 @@
     float: left;
     padding: 0 10px 0 20px;
     width: calc(50% - 50px);
-    height: 1050px;
 
     display: flex;
     flex-direction: column;
@@ -12,7 +11,7 @@
     float: right;
     padding: 0 20px 0 10px;
     width: calc(50% - 50px);
-    height: 90%;
+    background-color: rgb(250, 250, 250);
 }
 
 .post-content {
@@ -20,6 +19,29 @@
 }
 
 .content-textarea {
+    overflow-y: hidden;
+    resize: none;
+    font-size: 1rem;
+}
+
+.post-text-input {
     width: 100%;
-    height: calc(100% - 2rem);
+    border: none;
+    margin: 1rem 0;
+}
+
+.post-text-input:focus {
+    outline: none;
+}
+
+.title-input {
+    height: 50px;
+    font-weight: bolder;
+    font-size: 1.5rem;
+}
+
+.subTitle-input {
+    height: 30px;
+    font-weight: bolder;
+    font-size: 1.2rem;
 }

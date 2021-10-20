@@ -62,23 +62,31 @@ function MakeVelogPost() {
         })
     }
 
+    function resizeTextAreaHeight(e) {
+        e.target.style.height = "1px";
+        e.target.style.height = (12+e.target.scrollHeight) + "px";
+    }
+
     return <div>
         <section className={styles['post-input']}>
             <div className={styles['post-title']}>
-                <div>타이틀</div>
-                <input value={title} onChange={e => setTitle(e.target.value)}/>
+                <input value={title}
+                       onChange={e => setTitle(e.target.value)}
+                       className={`${styles['post-text-input']} ${styles['title-input']}`}
+                       placeholder={"글의 제목을 입력해 주세요"}/>
             </div>
             <div className={styles['post-subTitle']}>
-                <div>서브 타이틀</div>
-                <input value={subTitle} onChange={e => setSubTitle(e.target.value)}/>
+                <input value={subTitle}
+                       onChange={e => setSubTitle(e.target.value)}
+                       className={`${styles['post-text-input']} ${styles['subTitle-input']}`}
+                       placeholder={'글의 설명을 입력해 주세요.'}/>
             </div>
             <div className={styles['post-content']}>
-                <div>컨텐트</div>
                 <textarea value={content}
-                          onChange={e => {
-                              setContent(e.target.value);
-                          }}
-                          className={styles['content-textarea']}/>
+                          onChange={e => setContent(e.target.value)}
+                          onKeyDown={resizeTextAreaHeight} onKeyUp={resizeTextAreaHeight}
+                          placeholder={'내용을 입력해 주세요.'}
+                          className={`${styles['post-text-input']} ${styles['content-textarea']}`}/>
             </div>
             <div className={styles['save-button']}>
                 <SquareRoundBtn text={'저장하기'} clickButton={clickSavePost}/>
