@@ -38,8 +38,3 @@ export async function makePostRegister(title, subTitle, content, userId) {
         date: date.toLocaleString(), writerId: userId
     })
 }
-
-export async function getMyPage(userName){
-    const data = await axios.get(`${server}/myPage?name=${userName}`);
-    return data.data;
-}
