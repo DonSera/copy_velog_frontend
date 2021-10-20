@@ -1,11 +1,10 @@
-import LoginComponent from "../components/Login/LoginComponent";
-import Modal from "../components/modals/Modal";
-import Header from "../components/header/Header";
-import Board from "../components/board/Board";
 import {useDispatch, useSelector} from "react-redux";
+import {useEffect, useState} from "react";
 import {close_modal} from "../redux/reducer/modalState";
 import {getPostRegister} from "../lib/server/post";
-import {useEffect, useState} from "react";
+import LoginComponent from "../components/Login/LoginComponent";
+import Modal from "../components/modals/Modal";
+import Board from "../components/board/Board";
 
 function Home() {
     const modalInfo = useSelector(state => state.modalState.modalInfo);
@@ -15,7 +14,10 @@ function Home() {
     const [postBoard, setPostBoard] = useState([]);
 
     useEffect(() => {
-        if (postBoard.length === 0) getPost();
+        if (postBoard.length === 0) {
+            // 처음에만 post 정보를 불러온다.
+            getPost();
+        }
     })
 
     function closeModal() {
@@ -41,9 +43,8 @@ function Home() {
     }
 
     return <>
-        <Header/>
-        <div id={'homeBody'} className={'Body'}>
-            <div className={'home-body-wrap'}>
+        <div className={'Home'}>
+            <div>
                 {postBoard}
             </div>
         </div>

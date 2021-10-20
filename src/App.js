@@ -12,6 +12,7 @@ import NotFound from "./pages/NotFound";
 import VelogPost from "./pages/VelogPost";
 import MyPage from "./pages/MyPage";
 import MakeVelogPost from "./pages/MakeVelogPost";
+import Header from "./components/header/Header";
 
 function App() {
     const dispatch = useDispatch();
@@ -25,16 +26,19 @@ function App() {
     return (
         <div className="App">
             <Router>
-                <Switch>
-                    <Route exact path={'/'} component={Home}/>
-                    <Route path={`/notice`} component={Notice}/>
-                    <Route path={`/tag_list`} component={TagList}/>
-                    <Route path={`/my_setting`} component={MySetting}/>
-                    <Route path={`/make_post`} component={MakeVelogPost}/>
-                    <Route path={`/myPage/:name`} component={MyPage}/>
-                    <Route path={`/post/:id`} component={VelogPost}/>
-                    <Route path={'*'} component={NotFound}/>
-                </Switch>
+                <Header/>
+                <section className={'Body'}>
+                    <Switch>
+                        <Route exact path={'/'} component={Home}/>
+                        <Route path={`/notice`} component={Notice}/>
+                        <Route path={`/tag_list`} component={TagList}/>
+                        <Route path={`/my_setting/:name`} component={MySetting}/>
+                        <Route path={`/make_post/:name`} component={MakeVelogPost}/>
+                        <Route path={`/myPage/:name`} component={MyPage}/>
+                        <Route path={`/post/:id`} component={VelogPost}/>
+                        <Route path={'*'} component={NotFound}/>
+                    </Switch>
+                </section>
             </Router>
         </div>
     );

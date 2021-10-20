@@ -21,7 +21,7 @@ button:hover {
     cursor: pointer;
 }
 
-#header {
+.Header {
     position: fixed;
     margin: 0 auto;
     left: 0;
@@ -32,42 +32,42 @@ button:hover {
     height: 109px;
 }
 
-#homeBody {
+.Home {
     margin: 0 auto;
     display: flex;
     width: calc(var(--borad-total-width) * 5);
 }
 
-#mySetting {
+.My-Setting {
     text-align: center;
 }
 
 @media (max-width: 1919px) {
-    #header {
+    .Header {
         width: calc(var(--borad-total-width) * 4);
     }
 
-    #homeBody {
+    .Home {
         width: calc(var(--borad-total-width) * 4);
     }
 }
 
 @media (max-width: 1440px) {
-    #header {
+    .Header {
         width: calc(var(--borad-total-width) * 3);
     }
 
-    #homeBody {
+    .Home {
         width: calc(var(--borad-total-width) * 3);
     }
 }
 
 @media (max-width: 1056px) {
-    #header {
+    .Header {
         width: 100%;
     }
 
-    #homeBody {
+    .Home {
         width: 100%;
     }
 
