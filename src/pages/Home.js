@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {getPostRegister} from "../lib/server/post";
 import Board from "../components/board/Board";
-import {setWriterName} from "../redux/reducer/paramState";
+import {removeWriterName} from "../redux/reducer/paramState";
 import {useDispatch} from "react-redux";
 
 function Home() {
@@ -9,15 +9,15 @@ function Home() {
     const [postBoard, setPostBoard] = useState(undefined);
 
     useEffect(() => {
+        dispatch(removeWriterName());
+    }, [])
+
+    useEffect(() => {
         if (postBoard === undefined) {
             // 처음에만 post 정보를 불러온다.
             getPost();
         }
     })
-
-    useEffect(() => {
-        dispatch(setWriterName({name: null}));
-    }, [])
 
     async function getPost() {
         let postBoardList = [];

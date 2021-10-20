@@ -1,11 +1,12 @@
 import styles from './MakeVelogPost.module.css'
 import {useEffect, useRef, useState} from "react";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import ReactMarkdown from 'react-markdown'
 import {makePostRegister} from "../lib/server/post";
 import SquareRoundBtn from "../components/buttons/SquareRoundBtn";
 import {viewMarkDown} from "../lib/viewMarkDown";
+import {removeWriterName} from "../redux/reducer/paramState";
 
 function MakeVelogPost() {
     const [title, setTitle] = useState('');
@@ -16,6 +17,11 @@ function MakeVelogPost() {
 
     const userInfo = useSelector(state => state.userInfo);
     const history = useHistory();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(removeWriterName());
+    }, [])
 
     useEffect(() => {
         renderPostOutput();

@@ -4,17 +4,16 @@ export const paramStateSlice = createSlice({
     name: 'paramState',
     initialState: {
         writerName : null,
-        postId : null,
     },
     reducers: {
         setWriterName: (state, action) => {
             state.writerName = action.payload.name;
         },
-        setPostId: (state, action) => {
-            state.postId = action.payload.id;
+        removeWriterName:(state) =>{
+            state.writerName = null;
         }
     }
 })
 
-export const {setWriterName, setPostId} = paramStateSlice.actions
+export const {setWriterName, removeWriterName} = paramStateSlice.actions
 export default paramStateSlice.reducer

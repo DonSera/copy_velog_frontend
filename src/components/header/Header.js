@@ -118,8 +118,7 @@ function Header() {
                     <TransBtn text={'Velog'} clickButton={() => history.push('/')} fontSize={2}/>
                     {paramState.writerName !== null
                     && <TransBtn text={paramState.writerName}
-                                 clickButton={() => history.push(`/my_page/${paramState.writerName}`)}
-                                 fontSize={1.5}/>}
+                                 clickButton={() => history.push(`/my_page/${paramState.writerName}`)}/>}
                 </section>
                 <section className={styles['header-right']}>
                     {userInfo.name}
