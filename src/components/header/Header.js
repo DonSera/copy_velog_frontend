@@ -13,6 +13,7 @@ function Header() {
     const history = useHistory();
     const dispatch = useDispatch();
     const userInfo = useSelector(state => state.userInfo);
+    const paramState = useSelector(state => state.paramState);
     const [openMenu, setOpenMenu] = useState(false);
     const [openMyPageMenu, setOpenMyPageMenu] = useState(false);
 
@@ -115,6 +116,10 @@ function Header() {
             <section className={styles['header-top']}>
                 <section className={styles['header-left']}>
                     <TransBtn text={'Velog'} clickButton={() => history.push('/')} fontSize={2}/>
+                    {paramState.writerName !== null
+                    && <TransBtn text={paramState.writerName}
+                                 clickButton={() => history.push(`/my_page/${paramState.writerName}`)}
+                                 fontSize={1.5}/>}
                 </section>
                 <section className={styles['header-right']}>
                     {userInfo.name}

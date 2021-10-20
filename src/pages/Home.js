@@ -1,8 +1,11 @@
 import {useEffect, useState} from "react";
 import {getPostRegister} from "../lib/server/post";
 import Board from "../components/board/Board";
+import {setWriterName} from "../redux/reducer/paramState";
+import {useDispatch} from "react-redux";
 
 function Home() {
+    const dispatch = useDispatch();
     const [postBoard, setPostBoard] = useState(undefined);
 
     useEffect(() => {
@@ -11,6 +14,10 @@ function Home() {
             getPost();
         }
     })
+
+    useEffect(() => {
+        dispatch(setWriterName({name: null}));
+    }, [])
 
     async function getPost() {
         let postBoardList = [];

@@ -1,13 +1,17 @@
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {getMyPage} from "../lib/server/post";
+import {setWriterName} from "../redux/reducer/paramState";
+import {useDispatch} from "react-redux";
+import {getMyPage} from "../lib/server/get";
 import Post from "../components/post/Post";
 
 function MyPage() {
     const {name} = useParams();
+    const dispatch = useDispatch();
     const [postInfos, setPostInfos] = useState(undefined);
 
     useEffect(() => {
+        dispatch(setWriterName({name: name}));
         getMyPageInfo();
     }, [name])
 
