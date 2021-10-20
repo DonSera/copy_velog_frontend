@@ -1,6 +1,10 @@
 import styles from './Board.module.css'
 
 function Board({info}) {
+    function splitDate(){
+        const date = info.date.split('오');
+        return date[0];
+    }
     return <div className={styles['board']}>
         <a className={styles['post-link']} href={`/post/${info.id}`}>
             <div className={styles['image-wrap']}>
@@ -14,7 +18,7 @@ function Board({info}) {
                 <h4 className={styles['content-title']}>{info.title}</h4>
                 <p className={styles['content-content']}>{info.subTitle}</p>
             </a>
-            <div className={styles['content-info']}>{info.date} 댓글 {info.commentNum}개</div>
+            <div className={styles['content-info']}>{splitDate()} 댓글 {info.commentNum}개</div>
         </div>
         <div className={styles['footer']}>
             <a className={`${styles['post-link']} ${styles['writer-info']}`} href={`/myPage/${info.writerInfo.name}`}>
