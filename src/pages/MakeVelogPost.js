@@ -4,7 +4,7 @@ import {useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import ReactMarkdown from 'react-markdown'
 import {makePostRegister} from "../lib/server/post";
-import BlackButton from "../components/buttons/BlackButton";
+import SquareRoundBtn from "../components/buttons/SquareRoundBtn";
 
 function MakeVelogPost() {
     const [title, setTitle] = useState('');
@@ -70,7 +70,7 @@ function MakeVelogPost() {
                           className={styles['content-textarea']}/>
             </div>
             <div className={styles['save-button']}>
-                <BlackButton text={'저장하기'} clickButton={clickSavePost}/>
+                <SquareRoundBtn text={'저장하기'} clickButton={clickSavePost}/>
             </div>
         </section>
         <div className={styles['post-output']}>

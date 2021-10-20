@@ -1,6 +1,6 @@
-import styles from './BlackButton.module.css'
+import styles from './SquareRoundBtn.module.css'
 
-function BlackButton({text, clickButton}) {
+function SquareRoundBtn({text, clickButton, color = 'black'}) {
     let clickDisabled = false;
 
     async function onClick() {
@@ -14,10 +14,10 @@ function BlackButton({text, clickButton}) {
     }
 
     return <button type={"button"}
-                   className={styles[`login-button`]}
+                   className={`${styles[`${color}-button`]} ${styles['square-round-button']}`}
                    onClick={onClick}>
         {text}
     </button>
 }
 
-export default BlackButton;
+export default SquareRoundBtn;
