@@ -10,7 +10,7 @@ function Home() {
 
     useEffect(() => {
         dispatch(removeWriterName());
-    }, [])
+    }, [dispatch])
 
     useEffect(() => {
         if (postBoard === undefined) {
