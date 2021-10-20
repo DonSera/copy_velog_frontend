@@ -57,6 +57,7 @@ function Header() {
     function logoutClick() {
         clickLogout(dispatch);
         handleMyPageBox();
+        history.push('/');
     }
 
     function loginOpenClick() {
