@@ -5,7 +5,9 @@ import {useHistory} from "react-router-dom";
 import {clickLogout} from "../Login/LoginBusiness";
 import {open_modal} from "../../redux/reducer/modalState";
 import SquareRoundBtn from "../buttons/SquareRoundBtn";
+import TransBtn from "../buttons/TransBtn";
 import Menu from "../menu/Menu";
+
 
 function Header() {
     const history = useHistory();
@@ -106,10 +108,7 @@ function Header() {
         return <div className={'Header'} ref={headerRef} style={{height: "110px"}}>
             <section className={styles['header-top']}>
                 <section className={styles['header-left']}>
-                    <button className={styles['logo']}
-                            onClick={() => history.push('/')}>
-                        velog
-                    </button>
+                    <TransBtn text={'Velog'} clickButton={() => history.push('/')} fontSize={2}/>
                 </section>
                 <section className={styles['header-right']}>
                     {userInfo.name}
@@ -119,10 +118,7 @@ function Header() {
                             <span>
                                 <SquareRoundBtn text={'새 게시글 작성'} clickButton={ClickMakePost} color={'white'}/>
                             </span>
-                            <button type={"button"}
-                                    onClick={handleMyPageBox}>
-                                마이페이지
-                            </button>
+                            <TransBtn text={'마이페이지'} clickButton={handleMyPageBox}/>
                             {openMyPageMenu && myPageBox()}
                         </div>
                         : <section>
@@ -134,15 +130,13 @@ function Header() {
             </section>
             <section className={styles['header-bottom']}>
                 <section className={styles['header-left']}>
-                    <button type={"button"}>트렌딩</button>
-                    <button type={"button"}>최신</button>
-                    <button type={"button"}>일자</button>
+                    <TransBtn text={'트렌딩'}/>
+                    <TransBtn text={'최신'}/>
+                    <TransBtn text={'일자'}/>
                 </section>
                 <section className={styles['header-right']}>
                     <div>
-                        <button onClick={handleMenuBox}>
-                            메뉴
-                        </button>
+                        <TransBtn text={'메뉴'} clickButton={handleMenuBox}/>
                         {openMenu && menuBox()}
                     </div>
                 </section>
