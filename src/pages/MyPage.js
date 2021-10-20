@@ -13,7 +13,7 @@ function MyPage() {
     useEffect(() => {
         dispatch(setWriterName({name: name}));
         getMyPageInfo();
-    }, [name])
+    }, [dispatch, name])
 
     async function getMyPageInfo() {
         const data = await getMyPage(name);
