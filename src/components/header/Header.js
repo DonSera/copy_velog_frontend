@@ -25,6 +25,7 @@ function Header() {
     })
 
     function updateScroll() {
+        // 스크롤을 내리면 header가 보이지 않게 한다.
         const currentScrollY = window.scrollY;
         const dir = currentScrollY - lastScrollTop.current > 0 ? "down" : "up"
 
@@ -37,21 +38,23 @@ function Header() {
         lastScrollTop.current = currentScrollY;
     }
 
-    function handleHistory(loc) {
-        history.push(`/${loc}`);
+    function ClickMakePost() {
+        return history.push(`/make_post/${userInfo.name}`);
     }
 
-    function handleMenu() {
+    function handleMenuBox() {
+        // 메뉴 버튼 동작 제어
         setOpenMenu(!openMenu);
     }
 
-    function handleMyPageMenu() {
+    function handleMyPageBox() {
+        // 마이페이지 버튼 동작 제어
         setOpenMyPageMenu(!openMyPageMenu);
     }
 
     function logoutClick() {
         clickLogout(dispatch);
-        handleMyPageMenu();
+        handleMyPageBox();
     }
 
     function loginOpenClick() {
@@ -62,15 +65,16 @@ function Header() {
         dispatch(open_modal({title: "Sign up"}));
     }
 
-    function menu() {
+    function menuBox() {
+        // 메뉴 버튼 누르면 나오는 box
         function gotoNotice() {
-            handleMenu();
-            return handleHistory('notice');
+            handleMenuBox();
+            return history.push('/notice');
         }
 
         function gotoTag() {
-            handleMenu();
-            return handleHistory('tag_list');
+            handleMenuBox();
+            return history.push('/tag_list');
         }
 
         const menuConfig = [
@@ -79,13 +83,13 @@ function Header() {
             ['서비스 정책'],
             ['Slack']
         ];
-        return <Menu config={menuConfig} closeMenu={handleMenu}/>;
+        return <Menu config={menuConfig} closeMenu={handleMenuBox}/>;
     }
 
-    function myPageMenu() {
+    function myPageBox() {
         function gotoSetting() {
-            handleMyPageMenu();
-            return handleHistory(`my_setting`);
+            handleMyPageBox();
+            return history.push(`/my_setting/${userInfo.name}`);
         }
 
         const menuConfig = [
@@ -95,35 +99,32 @@ function Header() {
             ['설정', gotoSetting],
             ['로그아웃', logoutClick]
         ];
-        return <Menu config={menuConfig} closeMenu={handleMyPageMenu}/>;
-    }
-
-    function makePostClick() {
-        return handleHistory('make_post');
+        return <Menu config={menuConfig} closeMenu={handleMyPageBox}/>;
     }
 
     function renderHeader() {
-        return <div id={'header'} ref={headerRef} style={{height: "110px"}}>
+        return <div className={'Header'} ref={headerRef} style={{height: "110px"}}>
             <section className={styles['header-top']}>
-                <section className={styles['left']}>
+                <section className={styles['header-left']}>
                     <button className={styles['logo']}
-                            onClick={() => handleHistory('')}>
+                            onClick={() => history.push('/')}>
                         velog
                     </button>
                 </section>
-                <section className={styles['right']}>
+                <section className={styles['header-right']}>
                     {userInfo.name}
                     {userInfo.email
                         ?
                         <div>
                             <span>
-                                <LoginButton text={'새 게시글 작성'} clickLogin={makePostClick}/>
+                                <LoginButton text={'새 게시글 작성'}
+                                             clickLogin={ClickMakePost}/>
                             </span>
                             <button type={"button"}
-                                    onClick={handleMyPageMenu}>
+                                    onClick={handleMyPageBox}>
                                 마이페이지
                             </button>
-                            {openMyPageMenu && myPageMenu()}
+                            {openMyPageMenu && myPageBox()}
                         </div>
                         : <section>
                             <LoginButton text={'Log in'} clickLogin={loginOpenClick}/>
@@ -133,17 +134,17 @@ function Header() {
                 </section>
             </section>
             <section className={styles['header-bottom']}>
-                <section className={styles['left']}>
+                <section className={styles['header-left']}>
                     <button type={"button"}>트렌딩</button>
                     <button type={"button"}>최신</button>
                     <button type={"button"}>일자</button>
                 </section>
-                <section className={styles['right']}>
+                <section className={styles['header-right']}>
                     <div>
-                        <button onClick={handleMenu}>
+                        <button onClick={handleMenuBox}>
                             메뉴
                         </button>
-                        {openMenu && menu()}
+                        {openMenu && menuBox()}
                     </div>
                 </section>
             </section>

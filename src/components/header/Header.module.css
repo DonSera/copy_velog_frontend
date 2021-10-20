@@ -3,29 +3,29 @@
     justify-content: space-between;
 }
 
-.left {
+.header-left {
     margin: 1px 3px;
 }
 
-.left > button {
+.header-left > button {
     font-size: 1rem;
     border: transparent;
     background-color: transparent;
     font-weight: bold;
 }
 
-.left > .logo {
+.header-left > .logo {
     font-size: 2rem;
 }
 
-.right {
+.header-right {
     margin: 1px 3px;
     display: flex;
     position: relative;
     align-items: center;
 }
 
-.right > div > button {
+.header-right > div > button {
     font-size: 1rem;
     border: transparent;
     background-color: transparent;
