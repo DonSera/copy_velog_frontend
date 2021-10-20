@@ -3,10 +3,10 @@ import {getPostRegister} from "../lib/server/post";
 import Board from "../components/board/Board";
 
 function Home() {
-    const [postBoard, setPostBoard] = useState([]);
+    const [postBoard, setPostBoard] = useState(undefined);
 
     useEffect(() => {
-        if (postBoard.length === 0) {
+        if (postBoard === undefined) {
             // 처음에만 post 정보를 불러온다.
             getPost();
         }
