@@ -5,13 +5,11 @@ import Post from "../components/post/Post";
 
 function MyPage() {
     const {name} = useParams();
-    const [postInfos, setPostInfos] = useState([]);
+    const [postInfos, setPostInfos] = useState(undefined);
 
     useEffect(() => {
-        if (postInfos.length === 0) {
-            getMyPageInfo();
-        }
-    })
+        getMyPageInfo();
+    }, [name])
 
     async function getMyPageInfo() {
         const data = await getMyPage(name);
@@ -19,9 +17,12 @@ function MyPage() {
     }
 
     return <>
-        {postInfos.map((post, index) => {
-            return <Post key={`body_board_${index}`} info={post}/>;
-        })}
+        {postInfos === undefined || postInfos.length === 0 ?
+            <div>작성한 게시물이 없습니다.</div>
+            : postInfos.map((post, index) => {
+                return <Post key={`body_board_${index}`} info={post}/>;
+            })
+        }
     </>
 }
 
