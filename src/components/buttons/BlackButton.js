@@ -1,4 +1,4 @@
-import styles from './LoginButton.module.css'
+import styles from './BlackButton.module.css'
 
 function BlackButton({text, clickButton}) {
     let clickDisabled = false;
