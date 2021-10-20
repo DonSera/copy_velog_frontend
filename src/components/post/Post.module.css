@@ -1,0 +1,38 @@
+:root {
+    --space-place: 3rem;
+}
+
+.post {
+    border-bottom: 1px solid darkgrey;
+    width: 768px;
+    margin: var(--space-place) auto;
+    padding: 0 1rem var(--space-place) 1rem;
+}
+
+.post:last-child {
+    border-bottom: none;
+}
+
+.post-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.post-subTitle {
+    padding-bottom: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.post-date {
+    color: darkgrey;
+}
+
+.post-link{
+    color: black;
+    text-decoration-line: none;
+}

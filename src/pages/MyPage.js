@@ -1,17 +1,27 @@
-import {useHistory, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {getMyPage} from "../lib/server/post";
+import Post from "../components/post/Post";
 
 function MyPage() {
-    const history = useHistory();
     const {name} = useParams();
+    const [postInfos, setPostInfos] = useState([]);
 
-    function handleHistory(loc) {
-        history.push(`/${loc}`)
+    useEffect(() => {
+        if (postInfos.length === 0) {
+            getMyPageInfo();
+        }
+    })
+
+    async function getMyPageInfo() {
+        const data = await getMyPage(name);
+        setPostInfos(data.info)
     }
 
     return <>
-        <div>MyPage</div>
-        <div>{name}</div>
-        <button onClick={() => handleHistory('')}>go home</button>
+        {postInfos.map((post, index) => {
+            return <Post key={`body_board_${index}`} info={post}/>;
+        })}
     </>
 }
 
