@@ -1,16 +1,8 @@
-import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
-import {close_modal} from "../redux/reducer/modalState";
 import {getPostRegister} from "../lib/server/post";
-import LoginComponent from "../components/Login/LoginComponent";
-import Modal from "../components/modals/Modal";
 import Board from "../components/board/Board";
 
 function Home() {
-    const modalInfo = useSelector(state => state.modalState.modalInfo);
-    const dispatch = useDispatch();
-    const LoginComp = LoginComponent(modalInfo.title);
-
     const [postBoard, setPostBoard] = useState([]);
 
     useEffect(() => {
@@ -19,15 +11,6 @@ function Home() {
             getPost();
         }
     })
-
-    function closeModal() {
-        dispatch(close_modal());
-    }
-
-    function renderModal() {
-        return <Modal closeModal={closeModal}
-                      {...LoginComp}/>
-    }
 
     async function getPost() {
         let postBoardList = [];
@@ -48,7 +31,6 @@ function Home() {
                 {postBoard}
             </div>
         </div>
-        {modalInfo.open && renderModal()}
     </>
 }
 
