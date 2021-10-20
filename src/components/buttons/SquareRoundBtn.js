@@ -4,12 +4,14 @@ function SquareRoundBtn({text, clickButton, color = 'black'}) {
     let clickDisabled = false;
 
     async function onClick() {
-        if (clickDisabled) {
-            return false;
-        } else {
-            clickDisabled = true;
-            clickButton();
-            clickDisabled = false;
+        if(typeof clickButton === 'function'){
+            if (clickDisabled) {
+                return false;
+            } else {
+                clickDisabled = true;
+                clickButton();
+                clickDisabled = false;
+            }
         }
     }
 
