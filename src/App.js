@@ -64,7 +64,7 @@ function App() {
                         <Route path={`/tag_list`} component={TagList}/>
                         <Route path={`/my_setting/:name`} component={MySetting}/>
                         <Route path={`/make_post/:name`} component={MakeVelogPost}/>
-                        <Route path={`/myPage/:name`} component={MyPage}/>
+                        <Route path={`/my_page/:name`} component={MyPage}/>
                         <Route path={`/post/:id`} component={VelogPost}/>
                         <Route path={'*'} component={NotFound}/>
                     </Switch>
