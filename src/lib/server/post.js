@@ -30,11 +30,12 @@ export async function getPostRegister(postId) {
     return await post('getPost', {id: postId});
 }
 
-export async function makePostRegister(title, subTitle, content, userId) {
+export async function makePostRegister(title, subTitle, content, userId, tags) {
     // backend와 연동하여 게시글 저장
     const date = new Date();
     return await post('makePost', {
         title: title, subTitle: subTitle, content: content,
-        date: date.toLocaleString(), writerId: userId
+        date: date.toLocaleString(), writerId: userId,
+        tags: tags
     })
 }

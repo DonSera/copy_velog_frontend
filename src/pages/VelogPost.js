@@ -7,11 +7,12 @@ import {viewMarkDown} from "../lib/viewMarkDown";
 import {getWriterName} from "../lib/server/get";
 import {useDispatch} from "react-redux";
 import {setWriterName} from "../redux/reducer/paramState";
+import SquareRoundBtn from "../components/buttons/SquareRoundBtn";
 
 function VelogPost() {
     const {id} = useParams();
     const dispatch = useDispatch();
-    const [MKObj, setMKObj] = useState({title: '', subTitle: '', content: ''});
+    const [MKObj, setMKObj] = useState({title: '', subTitle: '', content: '', tags: []});
 
     useEffect(() => {
         if (MKObj.title === '') {
@@ -31,7 +32,8 @@ function VelogPost() {
             setMKObj({
                 title: `# ${postInfo.info.title}`,
                 subTitle: `## ${postInfo.info.subTitle}`,
-                content: postInfo.info.content
+                content: postInfo.info.content,
+                tags: postInfo.info.tags,
             })
         }
         console.log(postInfo.message);
@@ -44,6 +46,9 @@ function VelogPost() {
         <div className={styles['post-body']}>
             <ReactMarkdown>{MKObj.title}</ReactMarkdown>
             <ReactMarkdown>{MKObj.subTitle}</ReactMarkdown>
+            {MKObj.tags.map((tag, index) => {
+                return <SquareRoundBtn text={tag} color={'tag'} key={`tag_view_${index}`}/>
+            })}
             {viewMarkDown(MKObj.content)}
         </div>
     </div>

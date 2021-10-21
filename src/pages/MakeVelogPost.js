@@ -38,7 +38,8 @@ function MakeVelogPost() {
                 convertTitle,
                 convertSubTitle,
                 content,
-                userInfo.id
+                userInfo.id,
+                tags
             );
 
             if (message.status) {
