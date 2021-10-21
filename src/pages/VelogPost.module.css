@@ -3,14 +3,22 @@
     --sidebar-margin: 20px;
 }
 
-.fix-sidebar {
+.sidebar {
     width: var(--sidebar-width);
     height: 150px;
     border: 1px solid darkgrey;
     border-radius: var(--sidebar-width);
     background-color: darkgrey;
+}
+
+.sidebar-fix {
+    margin-top: 10px;
     position: fixed;
-    margin-top: var(--sidebar-width);
+}
+
+.sidebar-absolute {
+    margin-top: 310px;
+    position: absolute;
 }
 
 .sidebar-left {

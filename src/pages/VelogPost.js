@@ -13,13 +13,32 @@ function VelogPost() {
     const {id} = useParams();
     const history = useHistory();
     const dispatch = useDispatch();
+
+    const [scrollY, setScrollY] = useState(0);
+    const [scrollFix, setScrollFix] = useState(false);
+
     const [MKObj, setMKObj] = useState({title: '', subTitle: '', content: '', tags: []});
 
     useEffect(() => {
         if (MKObj.title === '') {
             getPost();
         }
-    })
+
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    });
+
+    function handleScroll() {
+        if (scrollY > 299) {
+            setScrollY(window.pageYOffset);
+            setScrollFix(true);
+        } else {
+            setScrollY(window.pageYOffset);
+            setScrollFix(false);
+        }
+    }
 
     async function getPost() {
         const postInfo = await getPostRegister(id);
@@ -45,8 +64,12 @@ function VelogPost() {
     }
 
     return <div className={'Post'}>
-        <div className={`${styles['sidebar-left']} ${styles['fix-sidebar']}`}/>
-        <div className={`${styles['sidebar-right']} ${styles['fix-sidebar']}`}/>
+        <div className={scrollFix
+            ? `${styles['sidebar-left']} ${styles['sidebar']} ${styles['sidebar-fix']}`
+            : `${styles['sidebar-left']} ${styles['sidebar']} ${styles['sidebar-absolute']}`}/>
+        <div className={scrollFix
+            ? `${styles['sidebar-right']} ${styles['sidebar']} ${styles['sidebar-fix']}`
+            : `${styles['sidebar-right']} ${styles['sidebar']} ${styles['sidebar-absolute']}`}/>
         <div className={styles['post-body']}>
             <ReactMarkdown>{MKObj.title}</ReactMarkdown>
             <ReactMarkdown>{MKObj.subTitle}</ReactMarkdown>
