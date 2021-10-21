@@ -1,5 +1,5 @@
 import styles from './MakeVelogPost.module.css'
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import ReactMarkdown from 'react-markdown'
@@ -17,7 +17,6 @@ function MakeVelogPost() {
     const userInfo = useSelector(state => state.userInfo);
     const history = useHistory();
     const dispatch = useDispatch();
-    const scrollRef = useRef();
 
     useEffect(() => {
         dispatch(removeWriterName());
@@ -62,12 +61,7 @@ function MakeVelogPost() {
         })
     }
 
-    function resizeTextAreaHeight(e) {
-        e.target.style.height = "1px";
-        e.target.style.height = (12 + e.target.scrollHeight) + "px";
-    }
-
-    return <div ref={scrollRef}>
+    return <div className={styles['post-wrap']}>
         <section className={styles['post-input']}>
             <div className={styles['post-title']}>
                 <input value={title}
@@ -84,7 +78,6 @@ function MakeVelogPost() {
             <div className={styles['post-content']}>
                 <textarea value={content}
                           onChange={e => setContent(e.target.value)}
-                          onKeyDown={resizeTextAreaHeight} onKeyUp={resizeTextAreaHeight}
                           placeholder={'내용을 입력해 주세요.'}
                           className={`${styles['post-text-input']} ${styles['content-textarea']}`}/>
             </div>
