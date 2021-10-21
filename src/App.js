@@ -12,6 +12,7 @@ import MySetting from "./pages/MySetting";
 import NotFound from "./pages/NotFound";
 import VelogPost from "./pages/VelogPost";
 import MyPage from "./pages/MyPage";
+import TagPage from "./pages/TagPage";
 import MakeVelogPost from "./pages/MakeVelogPost";
 
 import Header from "./components/header/Header";
@@ -66,6 +67,7 @@ function App() {
                         <Route path={`/make_post/:name`} component={MakeVelogPost}/>
                         <Route path={`/my_page/:name`} component={MyPage}/>
                         <Route path={`/post/:id`} component={VelogPost}/>
+                        <Route path={`/tag_page/:tag`} component={TagPage}/>
                         <Route path={'*'} component={NotFound}/>
                     </Switch>
                 </section>

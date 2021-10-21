@@ -1,5 +1,5 @@
 import styles from './VelogPost.module.css'
-import {useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import ReactMarkdown from 'react-markdown'
 import {getPostRegister} from "../lib/server/post";
@@ -11,6 +11,7 @@ import SquareRoundBtn from "../components/buttons/SquareRoundBtn";
 
 function VelogPost() {
     const {id} = useParams();
+    const history = useHistory();
     const dispatch = useDispatch();
     const [MKObj, setMKObj] = useState({title: '', subTitle: '', content: '', tags: []});
 
@@ -39,7 +40,10 @@ function VelogPost() {
         console.log(postInfo.message);
     }
 
-    // 양 옆에 고정된것 만들다가 그만둠
+    async function clickTagButton(tag) {
+        return history.push(`/tag_page/${tag}`);
+    }
+
     return <div className={'Post'}>
         <div className={`${styles['sidebar-left']} ${styles['fix-sidebar']}`}/>
         <div className={`${styles['sidebar-right']} ${styles['fix-sidebar']}`}/>
@@ -47,7 +51,10 @@ function VelogPost() {
             <ReactMarkdown>{MKObj.title}</ReactMarkdown>
             <ReactMarkdown>{MKObj.subTitle}</ReactMarkdown>
             {MKObj.tags.map((tag, index) => {
-                return <SquareRoundBtn text={tag} color={'tag'} key={`tag_view_${index}`}/>
+                return <SquareRoundBtn text={tag}
+                                       color={'tag'}
+                                       clickButton={() => clickTagButton(tag)}
+                                       key={`tag_view_${index}`}/>
             })}
             {viewMarkDown(MKObj.content)}
         </div>

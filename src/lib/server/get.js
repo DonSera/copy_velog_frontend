@@ -11,3 +11,8 @@ export async function getWriterName(postId) {
     const data = await axios.get(`${server}/getWriterName?id=${postId}`);
     return data.data;
 }
+
+export async function getTagPost(tag) {
+    const data = await axios.get(`${server}/getTagPost?tag=${tag}`);
+    return data.data;
+}
