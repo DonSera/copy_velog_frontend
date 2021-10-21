@@ -25,11 +25,7 @@
 }
 
 @media (max-width: 1056px) {
-    .fix-left {
-        visibility: hidden;
-    }
-
-    .fix-right {
+    .fix-sidebar {
         visibility: hidden;
     }
 }
