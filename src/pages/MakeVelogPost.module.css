@@ -1,9 +1,6 @@
-.post-wrap {
-}
-
 .post-input {
     float: left;
-    padding: 0 10px 0 20px;
+    margin: 0 0 0 calc(var(--borad-margin) * 2);
     width: calc(50% - 50px);
 
     display: flex;
@@ -12,9 +9,9 @@
 
 .post-output {
     float: right;
-    padding: 0 20px 0 10px;
+    margin: 0 calc(var(--borad-margin) * 2) 0 0;
     width: calc(50% - 50px);
-    height: 1200px;
+    height: 1120px;
     overflow: scroll;
     background-color: rgb(250, 250, 250);
 }
@@ -24,7 +21,7 @@
 }
 
 .content-textarea {
-    height: 1000px;
+    height: 900px;
 }
 
 .post-text-input {
@@ -47,4 +44,10 @@
     height: 30px;
     font-weight: bolder;
     font-size: 1.2rem;
+}
+
+.save-button {
+    position: fixed;
+    left: calc(50% + var(--borad-margin));
+    bottom: calc(var(--borad-margin) * 2);
 }
