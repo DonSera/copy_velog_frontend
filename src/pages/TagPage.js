@@ -13,7 +13,6 @@ function TagPage() {
 
     async function getTagPageInfo() {
         const data = await getTagPost(tag);
-        console.dir(data.info);
         setPostInfos(data.info)
     }
 
