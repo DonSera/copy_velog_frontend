@@ -1,7 +1,8 @@
 .post-input {
     float: left;
     margin: 0 0 0 calc(var(--borad-margin) * 2);
-    width: calc(50% - 50px);
+    padding: 0 var(--borad-margin);
+    width: calc(50% - var(--borad-margin) * 4);
 
     display: flex;
     flex-direction: column;
@@ -10,7 +11,8 @@
 .post-output {
     float: right;
     margin: 0 calc(var(--borad-margin) * 2) 0 0;
-    width: calc(50% - 50px);
+    padding: 0 var(--borad-margin);
+    width: calc(50% - var(--borad-margin) * 4);
     height: 1120px;
     overflow: scroll;
     background-color: rgb(250, 250, 250);
@@ -48,6 +50,6 @@
 
 .save-button {
     position: fixed;
-    left: calc(50% + var(--borad-margin));
+    left: 50%;
     bottom: calc(var(--borad-margin) * 2);
 }
