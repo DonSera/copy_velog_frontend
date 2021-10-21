@@ -112,7 +112,7 @@ function Header() {
     }
 
     function renderHeader() {
-        return <div className={'Header'} ref={headerRef} style={{height: "110px"}}>
+        return <div className={'Header'} ref={headerRef}>
             <section className={styles['header-top']}>
                 <section className={styles['header-left']}>
                     <TransBtn text={'Velog'} clickButton={() => history.push('/')} fontSize={2}/>

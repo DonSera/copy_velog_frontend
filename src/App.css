@@ -4,6 +4,8 @@
     --borad-total-width: calc(var(--board-width) + var(--borad-margin) * 2);
     --body-margin-top: 110px;
     --post-width: 768px;
+
+    --header-z-index: 899;
 }
 
 .App {
@@ -23,6 +25,7 @@ button:hover {
 }
 
 .Header {
+    z-index: var(--header-z-index);
     position: fixed;
     margin: 0 auto;
     left: 0;
@@ -30,7 +33,7 @@ button:hover {
 
     width: calc(var(--borad-total-width) * 5);
     background-color: white;
-    height: 109px;
+    height: calc(var(--body-margin-top) - 20px);
 
     border-bottom: 1px solid lightgrey;
 }
