@@ -39,6 +39,8 @@ function VelogPost() {
 
     // 양 옆에 고정된것 만들다가 그만둠
     return <div className={'Post'}>
+        <div className={`${styles['sidebar-left']} ${styles['fix-sidebar']}`}/>
+        <div className={`${styles['sidebar-right']} ${styles['fix-sidebar']}`}/>
         <div className={styles['post-body']}>
             <ReactMarkdown>{MKObj.title}</ReactMarkdown>
             <ReactMarkdown>{MKObj.subTitle}</ReactMarkdown>

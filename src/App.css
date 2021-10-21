@@ -3,6 +3,7 @@
     --borad-margin: 16px;
     --borad-total-width: calc(var(--board-width) + var(--borad-margin) * 2);
     --body-margin-top: 110px;
+    --post-width: 768px;
 }
 
 .App {
@@ -12,8 +13,8 @@
     padding-top: var(--body-margin-top);
 }
 
-.Post{
-    width: 768px;
+.Post {
+    width: var(--post-width);
     margin: 0 auto;
 }
 
@@ -28,8 +29,10 @@ button:hover {
     right: 0;
 
     width: calc(var(--borad-total-width) * 5);
-    background-color: wheat;
+    background-color: white;
     height: 109px;
+
+    border-bottom: 1px solid lightgrey;
 }
 
 .Home {
@@ -71,7 +74,7 @@ button:hover {
         width: 100%;
     }
 
-    .Post{
+    .Post {
         width: 100%;
     }
 }
