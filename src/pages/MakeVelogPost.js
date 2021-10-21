@@ -66,7 +66,8 @@ function MakeVelogPost() {
 
     function enterTag() {
         const preTags = tags.slice();
-        preTags.push(tag);
+        const smallTag = tag.toLowerCase();
+        preTags.push(smallTag);
         setTag('')
         setTags(preTags);
     }
