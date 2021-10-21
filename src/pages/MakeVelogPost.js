@@ -12,7 +12,9 @@ function MakeVelogPost() {
     const [title, setTitle] = useState('');
     const [subTitle, setSubTitle] = useState('');
     const [content, setContent] = useState('');
+    const [tag, setTag] = useState('');
     const [MKObj, setMKObj] = useState({title: '', subTitle: '', content: ''});
+    const [tags, setTags] = useState([]);
 
     const userInfo = useSelector(state => state.userInfo);
     const history = useHistory();
@@ -61,6 +63,19 @@ function MakeVelogPost() {
         })
     }
 
+    function enterTag() {
+        const preTags = tags.slice();
+        preTags.push(tag);
+        setTag('')
+        setTags(preTags);
+    }
+
+    function deleteTag(index = 0) {
+        const preTags = tags.slice();
+        preTags.splice(index, 1);
+        setTags(preTags);
+    }
+
     return <div className={styles['post-wrap']}>
         <section className={styles['post-input']}>
             <div className={styles['post-title']}>
@@ -74,6 +89,19 @@ function MakeVelogPost() {
                        onChange={e => setSubTitle(e.target.value)}
                        className={`${styles['post-text-input']} ${styles['subTitle-input']}`}
                        placeholder={'글의 설명을 입력해 주세요.'}/>
+            </div>
+            <span>
+                {tags.map((tag, index) => <SquareRoundBtn key={`tag_button_${index}`}
+                                                          text={tag}
+                                                          color={'tag'}
+                                                          clickButton={() => deleteTag(index)}/>)}
+            </span>
+            <div className={styles['post-tag']}>
+                <input value={tag}
+                       onChange={e => setTag(e.target.value)}
+                       className={`${styles['post-text-input']} ${styles['']}`}
+                       placeholder={'원하는 태그를 enter로 넣어주세요.'}
+                       onKeyUp={e => e.keyCode === 13 && enterTag()}/>
             </div>
             <div className={styles['post-content']}>
                 <textarea value={content}

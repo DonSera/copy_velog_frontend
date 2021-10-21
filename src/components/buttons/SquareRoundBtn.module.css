@@ -28,3 +28,9 @@
     background-color: black;
     color: white;
 }
+
+.tag-button {
+    border: 1px solid green;
+    background-color: rgb(230, 230, 230);
+    color: green;
+}
