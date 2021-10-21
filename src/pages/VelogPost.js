@@ -1,5 +1,6 @@
+import styles from './VelogPost.module.css'
 import {useParams} from "react-router-dom";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import ReactMarkdown from 'react-markdown'
 import {getPostRegister} from "../lib/server/post";
 import {viewMarkDown} from "../lib/viewMarkDown";
@@ -10,8 +11,7 @@ import {setWriterName} from "../redux/reducer/paramState";
 function VelogPost() {
     const {id} = useParams();
     const dispatch = useDispatch();
-    const [MKObj, setMKObj] = useState({title: '', subTitle: '', contents: []});
-    const enterCheck = useRef(false);
+    const [MKObj, setMKObj] = useState({title: '', subTitle: '', content: ''});
 
     useEffect(() => {
         if (MKObj.title === '') {
@@ -31,18 +31,19 @@ function VelogPost() {
             setMKObj({
                 title: `# ${postInfo.info.title}`,
                 subTitle: `## ${postInfo.info.subTitle}`,
-                contents: postInfo.info.content.split("\n")
+                content: postInfo.info.content
             })
         }
         console.log(postInfo.message);
     }
 
+    // 양 옆에 고정된것 만들다가 그만둠
     return <div className={'Post'}>
-        <ReactMarkdown>{MKObj.title}</ReactMarkdown>
-        <ReactMarkdown>{MKObj.subTitle}</ReactMarkdown>
-        {MKObj.contents.map((content, index) => {
-            return viewMarkDown(content, index, enterCheck);
-        })}
+        <div className={styles['post-body']}>
+            <ReactMarkdown>{MKObj.title}</ReactMarkdown>
+            <ReactMarkdown>{MKObj.subTitle}</ReactMarkdown>
+            {viewMarkDown(MKObj.content)}
+        </div>
     </div>
 }
 

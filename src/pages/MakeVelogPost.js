@@ -12,12 +12,12 @@ function MakeVelogPost() {
     const [title, setTitle] = useState('');
     const [subTitle, setSubTitle] = useState('');
     const [content, setContent] = useState('');
-    const [MKObj, setMKObj] = useState({title: '', subTitle: '', contents: []});
-    const enterCheck = useRef(false);
+    const [MKObj, setMKObj] = useState({title: '', subTitle: '', content: ''});
 
     const userInfo = useSelector(state => state.userInfo);
     const history = useHistory();
     const dispatch = useDispatch();
+    const scrollRef = useRef();
 
     useEffect(() => {
         dispatch(removeWriterName());
@@ -58,16 +58,16 @@ function MakeVelogPost() {
         setMKObj({
             title: convertTitle,
             subTitle: convertSubTitle,
-            contents: content.split("\n")
+            content: content
         })
     }
 
     function resizeTextAreaHeight(e) {
         e.target.style.height = "1px";
-        e.target.style.height = (12+e.target.scrollHeight) + "px";
+        e.target.style.height = (12 + e.target.scrollHeight) + "px";
     }
 
-    return <div>
+    return <div ref={scrollRef}>
         <section className={styles['post-input']}>
             <div className={styles['post-title']}>
                 <input value={title}
@@ -95,9 +95,7 @@ function MakeVelogPost() {
         <div className={styles['post-output']}>
             <ReactMarkdown>{MKObj.title}</ReactMarkdown>
             <ReactMarkdown>{MKObj.subTitle}</ReactMarkdown>
-            {MKObj.contents.map((content, index) => {
-                return viewMarkDown(content, index, enterCheck);
-            })}
+            {viewMarkDown(MKObj.content)}
         </div>
     </div>
 }
