@@ -67,9 +67,11 @@ function MakeVelogPost() {
     function enterTag() {
         const preTags = tags.slice();
         const smallTag = tag.toLowerCase();
-        preTags.push(smallTag);
+        if (preTags.indexOf(smallTag) < 0 && smallTag !== '') {
+            preTags.push(smallTag);
+            setTags(preTags);
+        }
         setTag('')
-        setTags(preTags);
     }
 
     function deleteTag(index = 0) {
