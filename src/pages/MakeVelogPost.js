@@ -13,8 +13,9 @@ function MakeVelogPost() {
     const [subTitle, setSubTitle] = useState('');
     const [content, setContent] = useState('');
     const [tag, setTag] = useState('');
-    const [MKObj, setMKObj] = useState({title: '', subTitle: '', content: ''});
     const [tags, setTags] = useState([]);
+    const [MKObj, setMKObj] = useState({title: '', subTitle: '', content: '', tags: []});
+
 
     const userInfo = useSelector(state => state.userInfo);
     const history = useHistory();
@@ -29,17 +30,15 @@ function MakeVelogPost() {
     }, [title, subTitle, content])
 
     async function clickSavePost() {
-        let convertTitle = title.trim();
-        let convertSubTitle = subTitle.trim();
-        if (convertTitle === '') {
+        if (MKObj.title === '') {
             alert("Title을 적어주세요");
         } else {
             const message = await makePostRegister(
-                convertTitle,
-                convertSubTitle,
-                content,
+                MKObj.title,
+                MKObj.subTitle,
+                MKObj.content,
                 userInfo.id,
-                tags
+                MKObj.tags
             );
 
             if (message.status) {
@@ -55,12 +54,13 @@ function MakeVelogPost() {
         let convertTitle = title.trim();
         let convertSubTitle = subTitle.trim();
         convertTitle = `# ${convertTitle}`;
-        convertSubTitle = `## ${convertSubTitle}`;
+        convertSubTitle = `### ${convertSubTitle}`;
 
         setMKObj({
             title: convertTitle,
             subTitle: convertSubTitle,
-            content: content
+            content: content,
+            tags : tags
         })
     }
 

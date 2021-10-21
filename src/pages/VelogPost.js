@@ -50,8 +50,8 @@ function VelogPost() {
 
         if (postInfo.status) {
             setMKObj({
-                title: `# ${postInfo.info.title}`,
-                subTitle: `## ${postInfo.info.subTitle}`,
+                title: postInfo.info.title,
+                subTitle: postInfo.info.subTitle,
                 content: postInfo.info.content,
                 tags: postInfo.info.tags,
             })
