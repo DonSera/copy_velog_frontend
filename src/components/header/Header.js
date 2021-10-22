@@ -13,6 +13,7 @@ function Header() {
     const history = useHistory();
     const dispatch = useDispatch();
     const userInfo = useSelector(state => state.userInfo);
+    const loginState = useSelector(state => state.loginState);
     const paramState = useSelector(state => state.paramState);
     const [openMenu, setOpenMenu] = useState(false);
     const [openMyPageMenu, setOpenMyPageMenu] = useState(false);
@@ -121,8 +122,7 @@ function Header() {
                                  clickButton={() => history.push(`/my_page/${paramState.writerName}`)}/>}
                 </section>
                 <section className={styles['header-right']}>
-                    {userInfo.name}
-                    {userInfo.email
+                    {loginState.bool
                         ?
                         <div>
                             <span>
