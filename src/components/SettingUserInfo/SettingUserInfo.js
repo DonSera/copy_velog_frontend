@@ -14,15 +14,14 @@ function SettingUserInfo() {
     const inputRef = useRef(null);
 
     async function saveName() {
-        const message = await userNameRegister(userInfo.id, userInfo.email, pw, name);
-        console.log(message.message);
-        if (message.status) {
+        const data = await userNameRegister(userInfo.id, userInfo.email, pw, name);
+        if (data.status) {
             dispatch(change_name({name: name}));
             dispatch(close_modal());
         } else {
             setPW('')
             handleFocus(inputRef);
-            alert(message.message);
+            alert(data.message);
         }
     }
 

@@ -33,7 +33,7 @@ function MakeVelogPost() {
         if (MKObj.title === '') {
             alert("Title을 적어주세요");
         } else {
-            const message = await makePostRegister(
+            const data = await makePostRegister(
                 MKObj.title,
                 MKObj.subTitle,
                 MKObj.content,
@@ -41,7 +41,7 @@ function MakeVelogPost() {
                 MKObj.tags
             );
 
-            if (message.status) {
+            if (data.status) {
                 history.push('/');
                 alert("게시물을 정상적으로 저장하였습니다.");
             } else {

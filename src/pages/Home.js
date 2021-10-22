@@ -23,12 +23,11 @@ function Home() {
         let postBoardList = [];
         const postInfo = await getPostRegister('');
         if (postInfo.status) {
-            const posts = postInfo.board;
+            const posts = postInfo.info;
             posts.forEach((post, index) => {
                 postBoardList.push(<Board key={`body_board_${index}`} info={post}/>);
             })
         }
-        console.log(postInfo.message);
         setPostBoard(postBoardList);
     }
 
