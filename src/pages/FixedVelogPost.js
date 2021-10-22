@@ -7,6 +7,7 @@ import {getPostRegister, fixedPostRegister} from "../lib/server/post";
 import SquareRoundBtn from "../components/buttons/SquareRoundBtn";
 import {viewMarkDown} from "../lib/viewMarkDown";
 import {removeWriterName} from "../redux/reducer/paramState";
+import {splitTitle, splitSubTitle} from "../lib/spliteTitle";
 
 function FixedVelogPost() {
     const {postId} = useParams();
@@ -42,24 +43,6 @@ function FixedVelogPost() {
             setContent(data.info.content);
             setTags(data.info.tags);
         }
-    }
-
-    function splitTitle(title) {
-        if (title.indexOf('#') === 0) {
-            return title.slice(2);
-        }
-        return title;
-    }
-
-    function splitSubTitle(subTitle) {
-        if (subTitle.indexOf('#') === 0) {
-            if (subTitle.slice(3).trim() === '') {
-                return '';
-            } else {
-                return subTitle.slice(3);
-            }
-        }
-        return subTitle;
     }
 
     async function clickSavePost() {

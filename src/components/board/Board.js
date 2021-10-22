@@ -1,27 +1,9 @@
 import styles from './Board.module.css'
 import {useHistory} from "react-router-dom";
+import {splitDate, splitSubTitle, splitTitle} from "../../lib/spliteTitle";
 
 function Board({info}) {
     const history = useHistory();
-
-    function splitDate() {
-        const date = info.date.split('오');
-        return date[0];
-    }
-
-    function splitTitle() {
-        if (info.title.indexOf('#') === 0) {
-            return info.title.slice(2);
-        }
-        return info.title;
-    }
-
-    function splitSubTitle() {
-        if (info.subTitle.indexOf('#') === 0) {
-            return info.subTitle.slice(3);
-        }
-        return info.subTitle;
-    }
 
     return <div className={styles['board']}>
         <div onClick={() => history.push(`/post/${info.id}`)}>
@@ -34,10 +16,12 @@ function Board({info}) {
         <div className={styles['content']}>
             <div className={styles['content-text']}
                  onClick={() => history.push(`/post/${info.id}`)}>
-                <h4 className={styles['content-title']}>{splitTitle()}</h4>
-                <p className={styles['content-content']}>{splitSubTitle()}</p>
+                <h4 className={styles['content-title']}>{splitTitle(info.title)}</h4>
+                <p className={styles['content-content']}>{splitSubTitle(info.subTitle)}</p>
             </div>
-            <div className={styles['content-info']}>{splitDate()} {info.commentNum}개 댓글</div>
+            <div className={styles['content-info']}>
+                {splitDate(info.date)} {info.commentNum}개 댓글
+            </div>
         </div>
         <div className={styles['footer']}>
             <div className={styles['writer-info']}
