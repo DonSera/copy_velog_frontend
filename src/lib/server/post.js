@@ -13,7 +13,7 @@ export async function loginRegister(type, email, password) {
 }
 
 export async function autoLoginRegister(id) {
-    return await post('id', {id: id});
+    return await post('autoLogin', {id: id});
 }
 
 export async function userNameRegister(id, email, password, newName) {
