@@ -9,7 +9,7 @@ function NotFound() {
 
     useEffect(() => {
         dispatch(removeWriterName());
-    }, [dispatch])
+    })
 
     function handleHistory(loc) {
         history.push(`/${loc}`)

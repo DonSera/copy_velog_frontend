@@ -9,7 +9,7 @@ function MySetting() {
 
     useEffect(() => {
         dispatch(removeWriterName());
-    }, [dispatch])
+    })
 
     function openModal() {
         dispatch(open_modal({title: '설정 변경'}));

@@ -22,7 +22,7 @@ import SettingUserInfo from "./components/SettingUserInfo/SettingUserInfo";
 
 function App() {
     const dispatch = useDispatch();
-    const modalInfo = useSelector(state => state.modalState.modalInfo);
+    const modalInfo = useSelector(state => state.modalState);
     const loginState = useSelector(state => state.loginState);
     const LoginComp = LoginComponent(modalInfo.title);
     const SetUsrInfo = SettingUserInfo();
@@ -32,7 +32,7 @@ function App() {
         if (!loginState.bool) {
             autoLogin(dispatch);
         }
-    }, [dispatch, loginState.bool]);
+    }, [loginState.bool]);
 
     function closeModal() {
         dispatch(close_modal());

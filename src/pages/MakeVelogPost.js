@@ -23,7 +23,7 @@ function MakeVelogPost() {
 
     useEffect(() => {
         dispatch(removeWriterName());
-    }, [dispatch])
+    })
 
     useEffect(() => {
         renderPostOutput();
