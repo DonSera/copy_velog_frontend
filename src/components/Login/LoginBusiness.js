@@ -1,4 +1,4 @@
-import {autoLoginRegister, loginRegister} from "../../lib/server/post";
+import {autoLoginRegister} from "../../lib/server/post";
 import {login_user, logout_user} from "../../redux/reducer/userInfo";
 import {state_login, state_logout} from "../../redux/reducer/loginState";
 
@@ -22,23 +22,10 @@ export async function autoLogin(dispatch) {
     }
 }
 
-export async function clickLogin(type, email, password, dispatch) {
-    const data = await loginRegister(type, email, password);
-    if (data.message.includes('success')) {
-        setStorage('id', data.id, '7'); // 7일 저장하기
-        loginSetState(dispatch, data);
-    }
-    return data.message;
-}
-
-function loginSetState(dispatch, data) {
-    dispatch(login_user({
-        email: data.email,
-        name: data.name,
-        id: data.id,
-    }));
+export function loginSetState(dispatch, data) {
+    // 로그인 정보 저장
+    dispatch(login_user({...data.info}));
     dispatch(state_login());
-    console.log(data.message);
 }
 
 export function clickLogout(dispatch) {
@@ -46,12 +33,6 @@ export function clickLogout(dispatch) {
     dispatch(logout_user());
     dispatch(state_logout());
     console.log("Log out success");
-}
-
-function setStorage(key, value, times) {
-    // localStorage 추가하기
-    const object = {value: value, timestamp: Date.now() + (times * 24 * 60 * 60 * 1000)};
-    localStorage.setItem(key, JSON.stringify(object));
 }
 
 function deleteStorage(key) {

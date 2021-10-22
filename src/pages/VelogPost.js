@@ -4,7 +4,6 @@ import {useEffect, useState} from "react";
 import ReactMarkdown from 'react-markdown'
 import {getPostRegister} from "../lib/server/post";
 import {viewMarkDown} from "../lib/viewMarkDown";
-import {getWriterName} from "../lib/server/get";
 import {useDispatch} from "react-redux";
 import {setWriterName} from "../redux/reducer/paramState";
 import SquareRoundBtn from "../components/buttons/SquareRoundBtn";
@@ -42,13 +41,8 @@ function VelogPost() {
 
     async function getPost() {
         const postInfo = await getPostRegister(id);
-        const writerData = await getWriterName(id);
-
-        if (writerData.status) {
-            dispatch(setWriterName({name: writerData.writerName}));
-        }
-
         if (postInfo.status) {
+            dispatch(setWriterName({name: postInfo.info.writerInfo.name}));
             setMKObj({
                 title: postInfo.info.title,
                 subTitle: postInfo.info.subTitle,
@@ -56,7 +50,6 @@ function VelogPost() {
                 tags: postInfo.info.tags,
             })
         }
-        console.log(postInfo.message);
     }
 
     async function clickTagButton(tag) {

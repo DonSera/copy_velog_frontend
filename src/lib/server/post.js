@@ -4,6 +4,7 @@ const server = 'http://localhost:3001';
 
 async function post(url, object) {
     const data = await axios.post(`${server}/${url}`, object);
+    console.log(data.data.message);
     return data.data;
 }
 

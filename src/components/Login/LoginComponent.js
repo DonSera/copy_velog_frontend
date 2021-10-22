@@ -1,11 +1,12 @@
 import LoginHeader from "./LoginHeader";
 import LoginBody from "./LoginBody";
 import LoginFooter from "./LoginFooter";
-import {clickLogin} from "./LoginBusiness";
+import {loginSetState} from "./LoginBusiness";
 import {useDispatch} from "react-redux";
 import {useRef, useState} from "react";
 import {handleFocus} from "../../lib/inputFocus";
 import {close_modal} from "../../redux/reducer/modalState";
+import {loginRegister} from "../../lib/server/post";
 
 
 function LoginComponent(title) {
@@ -56,28 +57,33 @@ function LoginComponent(title) {
                         setPassword('');
                         handleFocus(pwInputRef);
                     } else {
-                        loginFunc(type, emailInfo, passwordInfo).then();
+                        loginFunc(type, emailInfo, passwordInfo);
                     }
                 } else {
-                    loginFunc(type, emailInfo, passwordInfo).then();
+                    // log in
+                    loginFunc(type, emailInfo, passwordInfo);
                 }
             }
         }
     }
 
     async function loginFunc(type, email, pw) {
-        const message = await clickLogin(type, email, pw, dispatch);
-        if (message.includes('success')) {
+        const data = await loginRegister(type, email, pw);
+        if (data.status) {
+            // localStorage 추가하기
+            const object = {value: data.id, timestamp: Date.now() + (7 * 24 * 60 * 60 * 1000)};
+            localStorage.setItem('id', JSON.stringify(object)); // 7일 저장하기
+            loginSetState(dispatch, data);
             closeLoginModal();
             setEmail('');
         } else {
-            if (message.includes('email')) {
+            if (data.message.includes('email')) {
                 setEmail('');
                 handleFocus(emailInputRef);
             } else {
                 handleFocus(pwInputRef);
             }
-            alert(message);
+            alert(data.message);
         }
         setPassword('');
         setCheckPW('');
