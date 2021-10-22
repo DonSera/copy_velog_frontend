@@ -20,3 +20,28 @@ export function splitSubTitle(subTitle) {
     }
     return subTitle;
 }
+
+export function renderPostOutput(title, subTitle, content, tags, setMKObj) {
+    let convertTitle = title.trim();
+    let convertSubTitle = subTitle.trim();
+    convertTitle = `# ${convertTitle}`;
+    convertSubTitle = `### ${convertSubTitle}`;
+
+    setMKObj({
+        title: convertTitle,
+        subTitle: convertSubTitle,
+        content: content,
+        tags: tags
+    })
+}
+
+
+export function enterTag(tags, tag, setTags, setTag) {
+    const preTags = tags.slice();
+    const smallTag = tag.toLowerCase();
+    if (preTags.indexOf(smallTag) < 0 && smallTag !== '') {
+        preTags.push(smallTag);
+        setTags(preTags);
+    }
+    setTag('')
+}

@@ -7,6 +7,7 @@ import {makePostRegister} from "../lib/server/post";
 import SquareRoundBtn from "../components/buttons/SquareRoundBtn";
 import {viewMarkDown} from "../lib/viewMarkDown";
 import {removeWriterName} from "../redux/reducer/paramState";
+import {enterTag, renderPostOutput} from "../lib/spliteTitle";
 
 function MakeVelogPost() {
     const [title, setTitle] = useState('');
@@ -26,7 +27,7 @@ function MakeVelogPost() {
     })
 
     useEffect(() => {
-        renderPostOutput();
+        renderPostOutput(title, subTitle, content, tags, setMKObj);
     }, [title, subTitle, content])
 
     async function clickSavePost() {
@@ -48,30 +49,6 @@ function MakeVelogPost() {
                 alert("게시물을 저장하지 못하였습니다.");
             }
         }
-    }
-
-    function renderPostOutput() {
-        let convertTitle = title.trim();
-        let convertSubTitle = subTitle.trim();
-        convertTitle = `# ${convertTitle}`;
-        convertSubTitle = `### ${convertSubTitle}`;
-
-        setMKObj({
-            title: convertTitle,
-            subTitle: convertSubTitle,
-            content: content,
-            tags : tags
-        })
-    }
-
-    function enterTag() {
-        const preTags = tags.slice();
-        const smallTag = tag.toLowerCase();
-        if (preTags.indexOf(smallTag) < 0 && smallTag !== '') {
-            preTags.push(smallTag);
-            setTags(preTags);
-        }
-        setTag('')
     }
 
     function deleteTag(index = 0) {
@@ -105,7 +82,7 @@ function MakeVelogPost() {
                        onChange={e => setTag(e.target.value)}
                        className={`${styles['post-text-input']} ${styles['']}`}
                        placeholder={'원하는 태그를 enter로 넣어주세요.'}
-                       onKeyUp={e => e.keyCode === 13 && enterTag()}/>
+                       onKeyUp={e => e.keyCode === 13 && enterTag(tags, tag, setTags, setTag)}/>
             </div>
             <div className={styles['post-content']}>
                 <textarea value={content}
