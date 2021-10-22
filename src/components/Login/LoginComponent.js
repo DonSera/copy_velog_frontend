@@ -71,7 +71,7 @@ function LoginComponent(title) {
         const data = await loginRegister(type, email, pw);
         if (data.status) {
             // localStorage 추가하기
-            const object = {value: data.id, timestamp: Date.now() + (7 * 24 * 60 * 60 * 1000)};
+            const object = {value: data.info.id, timestamp: Date.now() + (7 * 24 * 60 * 60 * 1000)};
             localStorage.setItem('id', JSON.stringify(object)); // 7일 저장하기
             loginSetState(dispatch, data);
             closeLoginModal();
