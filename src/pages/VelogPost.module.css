@@ -33,7 +33,7 @@
 }
 
 @media (max-width: 1056px) {
-    .fix-sidebar {
+    .sidebar {
         visibility: hidden;
     }
 }
