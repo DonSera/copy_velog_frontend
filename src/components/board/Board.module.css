@@ -11,11 +11,6 @@
     transition-duration: 0.5s;
 }
 
-.post-link {
-    color: black;
-    text-decoration-line: none;
-}
-
 .image {
     height: 167px;
     overflow: hidden;

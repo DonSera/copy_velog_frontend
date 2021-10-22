@@ -1,10 +1,10 @@
 import styles from './VelogPost.module.css'
 import {useHistory, useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import ReactMarkdown from 'react-markdown'
 import {getPostRegister} from "../lib/server/post";
 import {viewMarkDown} from "../lib/viewMarkDown";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {setWriterName} from "../redux/reducer/paramState";
 import SquareRoundBtn from "../components/buttons/SquareRoundBtn";
 
@@ -12,7 +12,9 @@ function VelogPost() {
     const {id} = useParams();
     const history = useHistory();
     const dispatch = useDispatch();
+    const userInfo = useSelector(state => state.userInfo);
 
+    const [fixed, setFixed] = useState(false);
     const [scrollY, setScrollY] = useState(0);
     const [scrollFix, setScrollFix] = useState(false);
 
@@ -40,14 +42,17 @@ function VelogPost() {
     }
 
     async function getPost() {
-        const postInfo = await getPostRegister(id);
-        if (postInfo.status) {
-            dispatch(setWriterName({name: postInfo.info.writerInfo.name}));
+        const data = await getPostRegister(id);
+        if (data.status) {
+            if (userInfo.name === data.info.writerInfo.name) {
+                setFixed(true);
+            }
+            dispatch(setWriterName({name: data.info.writerInfo.name}));
             setMKObj({
-                title: postInfo.info.title,
-                subTitle: postInfo.info.subTitle,
-                content: postInfo.info.content,
-                tags: postInfo.info.tags,
+                title: data.info.title,
+                subTitle: data.info.subTitle,
+                content: data.info.content,
+                tags: data.info.tags,
             })
         }
     }
@@ -64,6 +69,7 @@ function VelogPost() {
             ? `${styles['sidebar-right']} ${styles['sidebar']} ${styles['sidebar-fix']}`
             : `${styles['sidebar-right']} ${styles['sidebar']} ${styles['sidebar-absolute']}`}/>
         <div className={styles['post-body']}>
+            {fixed && <div> 수정/삭제하기</div>}
             <ReactMarkdown>{MKObj.title}</ReactMarkdown>
             <ReactMarkdown>{MKObj.subTitle}</ReactMarkdown>
             {MKObj.tags.map((tag, index) => {
