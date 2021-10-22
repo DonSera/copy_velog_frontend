@@ -1,15 +1,15 @@
 import styles from './VelogPost.module.css'
 import {useHistory, useParams} from "react-router-dom";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import ReactMarkdown from 'react-markdown'
-import {getPostRegister} from "../lib/server/post";
+import {deletePostRegister, getPostRegister} from "../lib/server/post";
 import {viewMarkDown} from "../lib/viewMarkDown";
 import {useDispatch, useSelector} from "react-redux";
 import {setWriterName} from "../redux/reducer/paramState";
 import SquareRoundBtn from "../components/buttons/SquareRoundBtn";
 
 function VelogPost() {
-    const {id} = useParams();
+    const {postId} = useParams();
     const history = useHistory();
     const dispatch = useDispatch();
     const userInfo = useSelector(state => state.userInfo);
@@ -42,7 +42,7 @@ function VelogPost() {
     }
 
     async function getPost() {
-        const data = await getPostRegister(id);
+        const data = await getPostRegister(postId);
         if (data.status) {
             if (userInfo.name === data.info.writerInfo.name) {
                 setFixed(true);
@@ -69,7 +69,19 @@ function VelogPost() {
             ? `${styles['sidebar-right']} ${styles['sidebar']} ${styles['sidebar-fix']}`
             : `${styles['sidebar-right']} ${styles['sidebar']} ${styles['sidebar-absolute']}`}/>
         <div className={styles['post-body']}>
-            {fixed && <div> 수정/삭제하기</div>}
+            {fixed && <section>
+                <button onClick={() => history.push(`/fixed_post/${postId}`)}> 수정하기</button>
+                <button onClick={async () => {
+                    const data = await deletePostRegister(postId);
+                    if (data.status) {
+                        history.push('/');
+                        alert("게시글을 정상적으로 삭제하였습니다.");
+                    } else {
+                        alert(data.message);
+                    }
+                }}> 삭제하기
+                </button>
+            </section>}
             <ReactMarkdown>{MKObj.title}</ReactMarkdown>
             <ReactMarkdown>{MKObj.subTitle}</ReactMarkdown>
             {MKObj.tags.map((tag, index) => {

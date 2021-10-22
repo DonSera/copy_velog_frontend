@@ -38,5 +38,20 @@ export async function makePostRegister(title, subTitle, content, userId, tags) {
         title: title, subTitle: subTitle, content: content,
         date: date.toLocaleString(), writerId: userId,
         tags: tags
-    })
+    });
+}
+
+export async function fixedPostRegister(postId, title, subTitle, content, userId, tags) {
+    // backend와 연동하여 게시글 수정
+    return await post('fixedPost', {
+        postId: postId,
+        title: title, subTitle: subTitle,
+        content: content, writerId: userId,
+        tags: tags
+    });
+}
+
+export async function deletePostRegister(postId) {
+    // 게시글 삭제
+    return await post('deletePost', {postId: postId});
 }
